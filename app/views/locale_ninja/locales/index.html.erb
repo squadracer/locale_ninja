@@ -1,3 +1,13 @@
-<h1 class="text-red-500">hey</h1>
-<%= I18n.t("hello") %>
-<%= @yml_locales %>
+<div class="flex flex-col w-full p-8">
+  <h1 class="text-dark-blue">Translations</h1>
+
+  <%= render partial: "/components/table" %>
+
+  <div class="w-full text-white bg-yellow-400 p-4 my-4">
+      <div class="container flex items-center justify-between px-6 py-4 mx-auto">
+          <div class="flex">
+              <p class="mx-3"><%= @yml_locales %></p>
+          </div>
+      </div>
+  </div>
+</div>
