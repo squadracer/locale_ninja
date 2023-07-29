@@ -3,11 +3,11 @@
 class GithubService
   require 'octokit'
 
-  public_constant :GITHUB_ACCESS_TOKEN
-  public_constant :REPOSITORY_NAME
-
   GITHUB_ACCESS_TOKEN = Rails.application.credentials.github.access_token
   REPOSITORY_NAME = Rails.application.credentials.github.repository_name
+
+  public_constant :GITHUB_ACCESS_TOKEN
+  public_constant :REPOSITORY_NAME
 
   def self.call
     client = Octokit::Client.new(access_token: GITHUB_ACCESS_TOKEN)
