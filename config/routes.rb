@@ -2,4 +2,5 @@
 
 LocaleNinja::Engine.routes.draw do
   resources :locales, only: [:index], path: '/'
+  get '/github', to: 'locales#github'
 end
