@@ -4,6 +4,6 @@ LocaleNinja::Engine.routes.draw do
   root to: 'dashboard#index'
 
   resources :dashboard, only: [:index]
-  resources :locales, only: %i[index show], param: :locale
+  resources :locales, only: %i[index show update], param: :locale
   get '/github', to: 'locales#github'
 end
