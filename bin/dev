@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+rails s &
+rails app:tailwind_engine_watch
