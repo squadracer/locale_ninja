@@ -3,13 +3,22 @@
 
   <!-- <%= render partial: "/components/table" %> -->
 
-  <%@code_value_by_locales.each do |locale, *values| %>
-    <div class="w-full max-w-sm px-4 py-3 m-2 bg-white rounded-md shadow-md">
-        <div class="flex items-center justify-between">
-            <span class="text-sm font-light text-gray-800"><%= locale %></span>
-            <%= link_to "test", locale_path(locale) %> 
-             <span class="text-sm font-light text-gray-800"><%= country_flag(locale) %></span>
+  <div class="flex flex-wrap">
+    <% @code_value_by_locales.each do |locale, *values| %>
+      <%= link_to locale_path(locale), class: "w-48 max-w-sm px-4 py-3 mx-4 my-12 bg-white rounded-md shadow-md border-solid border-t-2 border-gray-400" do %> 
+        <div class="flex flex-col justify-between">
+            <div>
+              <div>
+                <span class="text-lg font-bold text-gray-800"><%= locale %></span>
+                <span class="text-sm font-light text-gray-800"><%= country_flag(locale) %></span>
+              </div>
+            </div>
+
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+              <div class="bg-blue-600 h-2.5 rounded-full" style="width: <%= (values[0].count{|key, value| value.present?}.to_f / values[0].count.to_f) * 100 %>%"></div>
+            </div>
         </div>
-    </div>
-  <% end %>
+      <% end %>
+    <% end %>
+  </div>
 </div>
