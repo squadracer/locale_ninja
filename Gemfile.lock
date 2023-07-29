@@ -92,6 +92,8 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
+    faraday-retry (2.2.0)
+      faraday (~> 2.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.14.1)
@@ -232,8 +234,6 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.6.3-arm64-darwin)
-    tailwindcss-rails (2.0.30-arm64-darwin)
-      railties (>= 6.0.0)
     thor (1.2.2)
     timeout (0.4.0)
     tzinfo (2.0.6)
@@ -247,10 +247,12 @@ GEM
 PLATFORMS
   arm64-darwin-20
   arm64-darwin-21
+  arm64-darwin-22
 
 DEPENDENCIES
   better_errors
   debug (>= 1.0.0)
+  faraday-retry
   locale_ninja!
   octokit (~> 5.0)
   puma
@@ -261,7 +263,6 @@ DEPENDENCIES
   rubocop-rspec
   sprockets-rails
   sqlite3
-  tailwindcss-rails (~> 2.0)
 
 BUNDLED WITH
    2.4.14

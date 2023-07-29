@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -11,6 +13,7 @@ gem 'sqlite3'
 gem 'sprockets-rails'
 
 gem 'octokit', '~> 5.0'
+gem 'faraday-retry'
 
 group :development, :test do
   gem 'debug', '>= 1.0.0'
