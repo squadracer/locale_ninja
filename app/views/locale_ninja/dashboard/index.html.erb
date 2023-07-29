@@ -1,4 +1,36 @@
 <div class="flex flex-col w-full p-8">
   <h1 class="text-dark-blue">Dashboard</h1>
-  <p class="mx-3"><%= @yml_locales.size %></p>
+  <div class="w-full p-8 my-8 bg-white rounded-lg shadow-md">
+    <div class="mt-2">
+        <span class="text-xl font-bold text-gray-700">Internationalization made easy ✌️</span>
+        <p class="mt-2 text-gray-600">Manage your translations in a simple and easy way. No more spreadsheets, no more copy-pasting. Just focus on your app.</p>
+    </div>
+  </div>
+  <div class="flex flex-row gap-4 my-4">
+    <div class="w-full p-8 space-y-8 text-center bg-white rounded-lg shadow-md">
+        <p class="font-medium text-gray-900 uppercase">Number of translations</p>
+
+        <h2 class="text-5xl font-bold text-white uppercase dark:text-gray-900">
+            <%= @yml_locales.size %>
+        </h2>
+
+        <p class="font-medium text-gray-900">Per month</p>
+    </div>
+      <div class="w-full p-8 space-y-8 text-center bg-white rounded-lg shadow-md">
+        <p class="font-medium text-gray-900 uppercase">Average completion</p>
+
+        <h2 class="text-5xl font-bold text-white uppercase dark:text-gray-900">
+            4051
+        </h2>
+
+        <p class="font-medium text-gray-900">Per month</p>
+    </div>
+      <div class="w-full p-8 space-y-8 text-center bg-white rounded-lg shadow-md">
+        <p class="font-medium text-gray-900 uppercase">Number of languages</p>
+
+        <h2 class="text-5xl font-bold text-white uppercase dark:text-gray-900">
+            16
+        </h2>
+    </div>
+  </div>
 </div>
