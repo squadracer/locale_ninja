@@ -24,5 +24,12 @@ module LocaleNinja
       sha = client.content(repository_name, path: file_path)[:sha]
       client.update_contents(repository_name, file_path, "translations #{DateTime.current}", sha, content, branch: 'translations')
     end
+
+    def self.create_branch(parent_branch, child_branch)
+      client = Octokit::Client.new(access_token: GITHUB_ACCESS_TOKEN)
+      repository_name = client.repositories.find { |repo| repo[:name] == REPOSITORY_NAME }[:full_name]
+      sha = client.ref(repository_name, "heads/#{parent_branch}").dig(:object, :sha)
+      client.create_ref(repository_name,"heads/#{child_branch}",sha)
+    end
   end
 end
