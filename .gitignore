@@ -9,7 +9,6 @@
 /spec/dummy/storage/
 /spec/dummy/tmp/
 /spec/dummy/config/master.key
-/spec/dummy/config/credentials.yml.enc
 
 /config/master.key
 /config/credentials.yml*
