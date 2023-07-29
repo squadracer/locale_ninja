@@ -5,7 +5,13 @@ module LocaleNinja
   require 'json'
   require 'cgi'
   class LocalesController < ApplicationController
-    skip_before_action :authenticate!, only: [:github, :traverse]
+    skip_before_action :authenticate!, only: %i[github traverse]
+
+    CLIENT_ID = Rails.application.credentials.github.client_id
+    CLIENT_SECRET = Rails.application.credentials.github.client_secret
+
+    private_constant :CLIENT_ID
+    private_constant :CLIENT_SECRET
 
     def index
       locales_yml = LocaleNinja::GithubService.new(access_token:).pull.map { YAML.load(_1) }
@@ -33,8 +39,8 @@ module LocaleNinja
       code = params['code']
       response = HTTParty.post('https://github.com/login/oauth/access_token',
                                body: {
-                                 client_id: ENV.fetch('GITHUB_CLIENT_ID', nil),
-                                 client_secret: ENV.fetch('GITHUB_APP_SECRET', nil),
+                                 client_id: CLIENT_ID,
+                                 client_secret: CLIENT_SECRET,
                                  code:
                                }
                               )

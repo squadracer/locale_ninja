@@ -4,8 +4,8 @@ module LocaleNinja
   class ApplicationController < ActionController::Base
     before_action :authenticate!
 
-    CLIENT_ID = ENV.fetch('GITHUB_CLIENT_ID', '')
-    public_constant :CLIENT_ID
+    CLIENT_ID = Rails.application.credentials.github.client_id
+    private_constant :CLIENT_ID
 
     private
 

@@ -8,7 +8,7 @@
 /spec/dummy/log/*.log
 /spec/dummy/storage/
 /spec/dummy/tmp/
-/spec/dummy/config/master.key
+/spec/dummy/config/credentials/*.key
 
 /config/master.key
 /config/credentials.yml*
@@ -84,3 +84,7 @@ yarn-debug.log*
 *.log
 
 app/assets/builds/locale_ninja.css
+
+/config/credentials/development.key
+
+/config/credentials/production.key
