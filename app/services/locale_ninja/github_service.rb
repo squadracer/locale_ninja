@@ -35,5 +35,14 @@ module LocaleNinja
       sha = @client.ref(repository_name, "heads/#{parent_branch}").dig(:object, :sha)
       @client.create_ref(repository_name, "heads/#{child_branch}", sha)
     end
+
+    def branch?(branch_name)
+      repository_name = @client.repositories.find { |repo| repo[:name] == REPOSITORY_NAME }[:full_name]
+      begin
+        @client.ref(repository_name, "heads/#{parent_branch}").dig(:object, :sha)
+      rescue Octokit::NotFound => e
+        nil
+      end
+    end
   end
 end
