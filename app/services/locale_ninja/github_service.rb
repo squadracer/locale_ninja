@@ -21,10 +21,6 @@ module LocaleNinja
       file.map { |path| Base64.decode64(@client.contents(repository, path:).content) }
     end
 
-    def pull_locale
-      
-    end
-
     def push(file_path, content)
       sha = @client.content(repository_fullname, path: file_path)[:sha]
       @client.update_contents(repository_fullname, file_path, "translations #{DateTime.current}", sha, content, branch: 'translations')
