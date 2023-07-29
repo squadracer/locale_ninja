@@ -82,3 +82,5 @@ yarn-debug.log*
 !/storage/.keep
 /public/uploads
 *.log
+
+app/assets/builds/locale_ninja.css
