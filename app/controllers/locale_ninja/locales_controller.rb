@@ -8,6 +8,10 @@ module LocaleNinja
       @code_value_by_locales = locales_yml.to_h { [_1.keys[0], traverse(_1)] }
     end
 
+    def show
+      @locale = params[:locale]
+    end
+
     def github
       # pour voir le retour de la github app
       @content = params.inspect

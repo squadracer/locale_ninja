@@ -7,7 +7,8 @@
     <div class="w-full max-w-sm px-4 py-3 m-2 bg-white rounded-md shadow-md dark:bg-gray-800">
         <div class="flex items-center justify-between">
             <span class="text-sm font-light text-gray-800 dark:text-gray-400"><%= locale %></span>
-             <span class="text-sm font-light text-gray-800 dark:text-gray-400"><%= locale.upcase.codepoints.map { |c| c + (0x1F1E6 - 65) }.pack('U*') %></span>
+            <%= link_to "test", locale_path(locale) %>
+             <span class="text-sm font-light text-gray-800 dark:text-gray-400"><%= country_flag(locale) %></span>
         </div>
     </div>
   <% end %>
