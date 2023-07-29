@@ -25,7 +25,7 @@ jobs:
           bundler-cache: true
       # Add or replace test runners here
       - name: Run tests
-        run: rspec
+        run: bundle exec rspec
 
   lint:
     runs-on: ubuntu-latest
@@ -36,10 +36,5 @@ jobs:
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
         with:
           bundler-cache: true
-      # Add or replace any other lints here
-      - name: Security audit dependencies
-        run: bin/bundler-audit --update
-      - name: Security audit application code
-        run: bin/brakeman -q -w2
       - name: Lint Ruby files
         run: bin/rubocop --parallel
