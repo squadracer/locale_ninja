@@ -4,11 +4,9 @@ module LocaleNinja
   class GithubService
     require 'octokit'
 
-    GITHUB_ACCESS_TOKEN = Rails.application.credentials.github.access_token
     REPOSITORY_FULLNAME = Rails.application.credentials.github.repository_name
 
-    public_constant :GITHUB_ACCESS_TOKEN
-    public_constant :REPOSITORY_FULLNAME
+    private_constant :REPOSITORY_FULLNAME
 
     def initialize(access_token:)
       @client = Octokit::Client.new(access_token:)
