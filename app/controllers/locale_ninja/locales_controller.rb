@@ -22,13 +22,15 @@ module LocaleNinja
       @locale = params[:locale]
 
       service = LocaleNinja::GithubService.new(access_token: session[:access_token])
-      locale_files_path = service.locale_files_path.filter { |path| path.ends_with?("#{@locale}.yml")}
-      hashes = service.pull(locale_files_path).map { |file| YAML::load(file)}
+      locale_files_path = service.locale_files_path.filter { |path| path.ends_with?("#{@locale}.yml") }
+      hashes = service.pull(locale_files_path).map { |file| YAML.load(file) }
       @translations = hashes.map { |hash| traverse(hash).to_h }.reduce(&:merge)
     end
+
     def update
       params[:val]
     end
+
     def traverse(hash, parent_key = nil)
       path = []
       hash.each do |key, value|
