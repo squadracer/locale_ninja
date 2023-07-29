@@ -23,7 +23,6 @@ require 'locale_ninja'
 
 module Dummy
   class Application < Rails::Application
-
     # For compatibility with applications that use this config
     config.action_controller.include_all_helpers = false
 

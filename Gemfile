@@ -12,8 +12,8 @@ gem 'sqlite3'
 
 gem 'sprockets-rails'
 
-gem 'octokit', '~> 5.0'
 gem 'faraday-retry'
+gem 'octokit', '~> 5.0'
 
 group :development, :test do
   gem 'debug', '>= 1.0.0'
