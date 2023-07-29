@@ -5,7 +5,7 @@ module LocaleNinja
   require 'json'
   require 'cgi'
   class LocalesController < ApplicationController
-    skip_before_action :authenticate!, only: [:github]
+    skip_before_action :authenticate!, only: [:github, :traverse]
 
     def index
       locales_yml = LocaleNinja::GithubService.new(access_token:).pull.map { YAML.load(_1) }
