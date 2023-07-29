@@ -16,11 +16,6 @@ module LocaleNinja
       @locale = params[:locale]
     end
 
-    def github
-      # pour voir le retour de la github app
-      @content = params.inspect
-    end
-
     def traverse(hash, parent_key = nil)
       path = []
       hash.each do |key, value|
