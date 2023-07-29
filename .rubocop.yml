@@ -18,7 +18,7 @@ require:
   - rubocop-factory_bot
 
 AllCops:
-  TargetRubyVersion: 3.2.2
+  TargetRubyVersion: 3.1.4
   TargetRailsVersion: 7.0
   NewCops: enable
   Exclude:
