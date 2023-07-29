@@ -13,3 +13,54 @@ getter and setter.
 
 Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
  (called from <main> at bin/rails:28)
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from <main> at bin/rails:28)
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from block (2 levels) in <class:Railtie> at /Users/clement/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/activerecord-7.0.6/lib/active_record/railtie.rb:264)
+Started GET "/locale_ninja" for ::1 at 2023-07-29 07:48:04 +0200
+Processing by LocaleNinja::LocalesController#index as HTML
+  Rendering layout /Users/clement/projects/locale_ninja/app/views/layouts/locale_ninja/application.html.erb
+  Rendering /Users/clement/projects/locale_ninja/app/views/locale_ninja/locales/index.html.erb within layouts/locale_ninja/application
+  Rendered /Users/clement/projects/locale_ninja/app/views/locale_ninja/locales/index.html.erb within layouts/locale_ninja/application (Duration: 5.4ms | Allocations: 2291)
+  Rendered layout /Users/clement/projects/locale_ninja/app/views/layouts/locale_ninja/application.html.erb (Duration: 125.1ms | Allocations: 70906)
+Completed 200 OK in 1854ms (Views: 133.4ms | ActiveRecord: 0.0ms | Allocations: 179836)
+
+
+DEPRECATION WARNING: Using legacy connection handling is deprecated. Please set
+`legacy_connection_handling` to `false` in your application.
+
+The new connection handling does not support `connection_handlers`
+getter and setter.
+
+Read more about how to migrate at: https://guides.rubyonrails.org/active_record_multiple_databases.html#migrate-to-the-new-connection-handling
+ (called from block (2 levels) in <class:Railtie> at /Users/clement/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/activerecord-7.0.6/lib/active_record/railtie.rb:264)
+Started GET "/locale_ninja" for ::1 at 2023-07-29 07:50:48 +0200
+Processing by LocaleNinja::LocalesController#index as HTML
+  Rendering layout /Users/clement/projects/locale_ninja/app/views/layouts/locale_ninja/application.html.erb
+  Rendering /Users/clement/projects/locale_ninja/app/views/locale_ninja/locales/index.html.erb within layouts/locale_ninja/application
+  Rendered /Users/clement/projects/locale_ninja/app/views/locale_ninja/locales/index.html.erb within layouts/locale_ninja/application (Duration: 9.9ms | Allocations: 2291)
+  Rendered layout /Users/clement/projects/locale_ninja/app/views/layouts/locale_ninja/application.html.erb (Duration: 75.3ms | Allocations: 32439)
+Completed 200 OK in 1977ms (Views: 83.4ms | ActiveRecord: 0.0ms | Allocations: 141370)
+
+
+Started GET "/locale_ninja" for ::1 at 2023-07-29 07:51:11 +0200
+Processing by LocaleNinja::LocalesController#index as HTML
+  Rendering layout /Users/clement/projects/locale_ninja/app/views/layouts/locale_ninja/application.html.erb
+  Rendering /Users/clement/projects/locale_ninja/app/views/locale_ninja/locales/index.html.erb within layouts/locale_ninja/application
+  Rendered /Users/clement/projects/locale_ninja/app/views/locale_ninja/locales/index.html.erb within layouts/locale_ninja/application (Duration: 1.5ms | Allocations: 190)
+  Rendered layout /Users/clement/projects/locale_ninja/app/views/layouts/locale_ninja/application.html.erb (Duration: 16.9ms | Allocations: 3886)
+Completed 200 OK in 1791ms (Views: 21.5ms | ActiveRecord: 0.0ms | Allocations: 54932)
+
+

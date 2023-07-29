@@ -3,6 +3,7 @@ PATH
   specs:
     locale_ninja (0.1.0)
       rails (>= 7.0.6)
+      tailwindcss-rails (>= 0.8.0)
 
 GEM
   remote: https://rubygems.org/
@@ -237,6 +238,10 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.6.3-arm64-darwin)
     sqlite3 (1.6.3-x86_64-linux)
+    tailwindcss-rails (2.0.30-arm64-darwin)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.30-x86_64-linux)
+      railties (>= 6.0.0)
     thor (1.2.2)
     timeout (0.4.0)
     tzinfo (2.0.6)
@@ -267,6 +272,7 @@ DEPENDENCIES
   rubocop-rspec
   sprockets-rails
   sqlite3
+  tailwindcss-rails (~> 2.0)
 
 BUNDLED WITH
    2.4.14
