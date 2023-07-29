@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 LocaleNinja::Engine.routes.draw do
-  resources :locales, only: [:index], path: '/'
+  root to: 'dashboard#index'
+
+  resources :dashboard, only: [:index]
+  resources :locales, only: [:index]
   get '/github', to: 'locales#github'
 end
