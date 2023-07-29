@@ -1,8 +1,8 @@
 class GithubService
   require 'octokit'
 
-  GITHUB_ACCESS_TOKEN = Rails.application.secrets.github.access_token
-  REPOSITORY_NAME = Rails.application.secrets.github.repository_name
+  GITHUB_ACCESS_TOKEN = Rails.application.credentials.github.access_token
+  REPOSITORY_NAME = Rails.application.credentials.github.repository_name
 
   def self.call
     client = Octokit::Client.new(access_token: GITHUB_ACCESS_TOKEN)
