@@ -47,8 +47,7 @@ module LocaleNinja
 
     def pull_request(branch_name)
       repository_name = @client.repositories.find { |repo| repo[:name] == REPOSITORY_NAME }[:full_name]
-      sha = @client.ref(repository_name, "heads/#{parent_branch}").dig(:object, :sha)
-      @client.create_ref(repository_name, "heads/#{child_branch}", sha)
+      client.create_pull_request(repository_name,'main',branch_name,"translations #{Time.current}")
     end
   end
 end
