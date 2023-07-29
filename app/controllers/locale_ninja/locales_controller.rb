@@ -20,7 +20,11 @@ module LocaleNinja
 
     def show
       @locale = params[:locale]
-      @static_data = { "en" => { "test.hello" => 'Hello', "test.bye" => 'World', "test.hep"=> 'salut'} }
+
+      service = LocaleNinja::GithubService.new(access_token: session[:access_token])
+      locale_files_path = service.locale_files_path.filter { |path| path.ends_with?("#{@locale}.yml") }
+      hashes = service.pull(locale_files_path).map { |file| YAML.load(file) }
+      @translations = hashes.map { |hash| traverse(hash).to_h }.reduce(&:merge)
     end
 
     def update
@@ -53,6 +57,5 @@ module LocaleNinja
       session[:access_token] = parsed['access_token'].first
       redirect_to('/locale_ninja')
     end
-
   end
 end

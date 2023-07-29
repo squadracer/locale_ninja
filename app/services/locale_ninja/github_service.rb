@@ -12,13 +12,13 @@ module LocaleNinja
       @client = Octokit::Client.new(access_token:)
     end
 
-    def local_files_path
+    def locale_files_path
       @client.contents(repository_fullname, path: 'config/locales').map(&:path)
     end
 
-    def pull
+    def pull(file = locale_files_path)
       repository = Octokit::Repository.new(repository_fullname)
-      local_files_path.map { |path| Base64.decode64(@client.contents(repository, path:).content) }
+      file.map { |path| Base64.decode64(@client.contents(repository, path:).content) }
     end
 
     def push(file_path, content)
