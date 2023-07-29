@@ -3,7 +3,7 @@
 module LocaleNinja
   class DashboardController < ApplicationController
     def index
-      @yml_locales = LocaleNinja::GithubService.call.map { YAML.load(_1) }
+      @yml_locales = LocaleNinja::GithubService.new(access_token:).call.map { YAML.load(_1) }
     end
   end
 end

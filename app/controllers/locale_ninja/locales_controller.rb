@@ -5,9 +5,10 @@ module LocaleNinja
   require 'json'
   require 'cgi'
   class LocalesController < ApplicationController
-    def index
-      locales_yml = LocaleNinja::GithubService.call.map { YAML.load(_1) }
+    skip_before_action :authenticate!, only: [:github]
 
+    def index
+      locales_yml = LocaleNinja::GithubService.new(access_token:).call.map { YAML.load(_1) }
       @code_value_by_locales = locales_yml.to_h { [_1.keys[0], traverse(_1)] }
     end
 
@@ -23,8 +24,6 @@ module LocaleNinja
       end
       path
     end
-    
-    def login; end
 
     def github
       code = params['code']
@@ -35,8 +34,9 @@ module LocaleNinja
                                  code:
                                }
                               )
-      parsed = CGI::parse(response)
-      client = Octokit::Client.new(access_token: parsed['access_token'].first)
+      parsed = CGI.parse(response)
+      session[:access_token] = parsed['access_token'].first
+      redirect_to('/locale_ninja')
     end
   end
 end
