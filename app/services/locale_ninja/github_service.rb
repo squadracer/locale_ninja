@@ -5,49 +5,50 @@ module LocaleNinja
     require 'octokit'
 
     GITHUB_ACCESS_TOKEN = Rails.application.credentials.github.access_token
-    REPOSITORY_NAME = Rails.application.credentials.github.repository_name
+    REPOSITORY_FULLNAME = Rails.application.credentials.github.repository_name
 
     public_constant :GITHUB_ACCESS_TOKEN
-    public_constant :REPOSITORY_NAME
+    public_constant :REPOSITORY_FULLNAME
 
     def initialize(access_token:)
       @client = Octokit::Client.new(access_token:)
     end
 
     def local_files_path
-      repository_name = @client.repositories.find { |repo| repo[:name] == REPOSITORY_NAME }[:full_name]
-      repository = Octokit::Repository.new(repository_name)
-      @client.contents(repository, path: 'config/locales').map(&:path)
+      @client.contents(repository_fullname, path: 'config/locales').map(&:path)
     end
 
     def pull
+      repository = Octokit::Repository.new(repository_fullname)
       local_files_path.map { |path| Base64.decode64(@client.contents(repository, path:).content) }
     end
 
     def push(file_path, content)
-      repository_name = @client.repositories.find { |repo| repo[:name] == REPOSITORY_NAME }[:full_name]
-      sha = @client.content(repository_name, path: file_path)[:sha]
-      @client.update_contents(repository_name, file_path, "translations #{DateTime.current}", sha, content, branch: 'translations')
+      sha = @client.content(repository_fullname, path: file_path)[:sha]
+      @client.update_contents(repository_fullname, file_path, "translations #{DateTime.current}", sha, content, branch: 'translations')
     end
 
     def create_branch(parent_branch, child_branch)
-      repository_name = @client.repositories.find { |repo| repo[:name] == REPOSITORY_NAME }[:full_name]
-      sha = @client.ref(repository_name, "heads/#{parent_branch}").dig(:object, :sha)
-      @client.create_ref(repository_name, "heads/#{child_branch}", sha)
+      sha = @client.ref(repository_fullname, "heads/#{parent_branch}").dig(:object, :sha)
+      @client.create_ref(repository_fullname, "heads/#{child_branch}", sha)
     end
 
     def branch?(branch_name)
-      repository_name = @client.repositories.find { |repo| repo[:name] == REPOSITORY_NAME }[:full_name]
-      begin
-        @client.ref(repository_name, "heads/#{branch_name}")
-      rescue Octokit::NotFound
-        nil
-      end
+      @client.ref(repository_fullname, "heads/#{branch_name}")
+    rescue Octokit::NotFound
+      nil
+    end
+
+    def repository_fullname
+      @repository_fullname ||= @client.repository(REPOSITORY_FULLNAME)[:full_name]
+    end
+
+    def branches
+      @client.branches(repository_fullname).map(&:name)
     end
 
     def pull_request(branch_name)
-      repository_name = @client.repositories.find { |repo| repo[:name] == REPOSITORY_NAME }[:full_name]
-      client.create_pull_request(repository_name, 'main', branch_name, "translations #{Time.current}")
+      @client.create_pull_request(repository_fullname, 'main', branch_name, "translations #{Time.current}")
     end
   end
 end
