@@ -14,7 +14,7 @@ module LocaleNinja
 
     def show
       @locale = params[:locale]
-      @static_data = { "en" => { "test.hello" => 'Hello', "test.bye" => 'World', "test.hep"=> 'salut'} }
+      @static_data = { 'en' => { 'test.hello' => 'Hello', 'test.bye' => 'World', 'test.hep' => 'salut' } }
     end
 
     def update
@@ -47,6 +47,5 @@ module LocaleNinja
       session[:access_token] = parsed['access_token'].first
       redirect_to('/locale_ninja')
     end
-
   end
 end
