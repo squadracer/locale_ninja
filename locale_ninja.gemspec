@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency('rails', '>= 7.0.6')
+  spec.add_dependency('tailwindcss-rails', '>= 0.8.0')
   spec.metadata['rubygems_mfa_required'] = 'true'
   spec.required_ruby_version = '>= 3.1.4'
 end
