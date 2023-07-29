@@ -8,7 +8,7 @@ module LocaleNinja
 
     def github
       # pour voir le retour de la github app
-      @content1 = params.inspect
+      @content = params.inspect
     end
   end
 end
