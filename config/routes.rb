@@ -6,4 +6,5 @@ LocaleNinja::Engine.routes.draw do
   resources :dashboard, only: [:index]
   resources :locales, only: [:index]
   get '/github', to: 'locales#github'
+  get '/login', to: 'locales#login'
 end
