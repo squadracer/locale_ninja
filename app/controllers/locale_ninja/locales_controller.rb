@@ -20,6 +20,11 @@ module LocaleNinja
 
     def show
       @locale = params[:locale]
+      @static_data = { "en" => { "test.hello" => 'Hello', "test.bye" => 'World', "test.hep"=> 'salut'} }
+    end
+
+    def update
+      params[:val]
     end
 
     def traverse(hash, parent_key = nil)
@@ -48,5 +53,6 @@ module LocaleNinja
       session[:access_token] = parsed['access_token'].first
       redirect_to('/locale_ninja')
     end
+
   end
 end
