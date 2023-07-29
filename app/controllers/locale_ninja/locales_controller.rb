@@ -57,6 +57,5 @@ module LocaleNinja
       session[:access_token] = parsed['access_token'].first
       redirect_to('/locale_ninja')
     end
-
   end
 end
