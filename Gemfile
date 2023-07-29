@@ -13,10 +13,11 @@ gem 'sqlite3'
 gem 'sprockets-rails'
 
 gem 'faraday-retry'
+gem 'httparty'
 gem 'octokit', '~> 5.0'
 
 group :development, :test do
-  gem 'debug', '>= 1.0.0'
+  gem 'pry-byebug'
   gem 'rspec-rails', '~> 6.0.0'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
