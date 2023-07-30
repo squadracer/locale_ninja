@@ -1,0 +1,6 @@
+fr:
+  locale_ninja:
+    locales:
+      update:
+        error: La traduction n'a pas pu être mise à jour.
+        success: La traduction a été mise à jour.

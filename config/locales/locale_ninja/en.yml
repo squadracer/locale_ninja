@@ -1,0 +1,6 @@
+en:
+  locale_ninja:
+    locales:
+      update:
+        error: Translation could not be updated.
+        success: Translation has been updated.

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Locale ninja</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= stylesheet_link_tag "locale_ninja/application", media: "all" %>
-  <%= stylesheet_link_tag "locale_ninja", "data-turbo-track": "reload" %>
-</head>
-<body class="flex min-h-screen">
+  <head>
+    <title>Locale ninja</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "locale_ninja/application", media: "all" %>
+    <%= stylesheet_link_tag "locale_ninja", "data-turbo-track": "reload" %>
+  </head>
+  <body class="flex min-h-screen">
     <%= render "/components/sidebar" %>
     <%= yield %>
-</body>
+    <%= render 'components/flashes' %>
+  </body>
 </html>
