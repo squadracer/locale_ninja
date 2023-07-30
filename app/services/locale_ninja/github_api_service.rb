@@ -9,6 +9,8 @@ module LocaleNinja
       @client = Octokit::Client.new(access_token:)
     end
 
+    attr_reader :client
+
     def user
       @client.user
     end
