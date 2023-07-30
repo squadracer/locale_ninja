@@ -10,7 +10,7 @@ module LocaleNinja
     private
 
     def set_client
-      @client = GithubService.new(access_token:)
+      @client = GithubApiService.new(access_token:)
     end
 
     def access_token

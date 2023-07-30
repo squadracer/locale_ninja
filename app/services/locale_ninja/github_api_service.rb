@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module LocaleNinja
-  class GithubService
+  class GithubApiService
     require 'octokit'
 
     REPOSITORY_FULLNAME = Rails.application.credentials.github.repository_name
@@ -12,8 +12,8 @@ module LocaleNinja
       @client = Octokit::Client.new(access_token:)
     end
 
-    def locale_files_path(dir = 'config/locales')
-      @client.contents(repository_fullname, path: dir, ref: 'heads/translations').map do |file|
+    def locale_files_path(dir = 'config/locales', branch: 'translations')
+      @client.contents(repository_fullname, path: dir, ref: "heads/#{branch}").map do |file|
         if file.type == 'dir'
           locale_files_path(file.path)
         else
@@ -24,19 +24,18 @@ module LocaleNinja
 
     def pull(file = locale_files_path, branch: 'translations')
       branch = 'main' unless branch?(branch)
-      repository = Octokit::Repository.new(repository_fullname)
-      file.index_with { |path| Base64.decode64(@client.contents(repository, path:, ref: "heads/#{branch}").content) }
+      file.index_with { |path| Base64.decode64(@client.contents(repository_fullname, path:, ref: "heads/#{branch}").content) }
     end
 
-    def push(file_path, content)
-      create_branch('main', 'translations') unless branch?('translations')
+    def push(file_path, content, branch: 'translations')
+      create_branch('main', branch) unless branch?(branch)
       begin
-        sha = @client.content(repository_fullname, path: file_path, ref: 'heads/translations')[:sha]
+        sha = @client.content(repository_fullname, path: file_path, ref: "heads/#{branch}")[:sha]
       rescue Octokit::NotFound
-        create_file(file_path, content, branch: 'translations')
+        create_file(file_path, content, branch:)
         return
       end
-      @client.update_contents(repository_fullname, file_path, "translations #{DateTime.current}", sha, content, branch: 'translations')
+      @client.update_contents(repository_fullname, file_path, "translations #{DateTime.current}", sha, content, branch:)
     end
 
     def create_file(file_path, content, branch: 'translations')
@@ -55,7 +54,7 @@ module LocaleNinja
     end
 
     def repository_fullname
-      @repository_fullname ||= @client.repository(REPOSITORY_FULLNAME)[:full_name]
+      @repository_fullname ||= REPOSITORY_FULLNAME
     end
 
     def branches
