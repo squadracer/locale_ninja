@@ -13,10 +13,10 @@ module LocaleNinja
     end
 
     def show
-      locales_yml = @client.pull.values.map { YAML.load(_1) }
-      @code_value_by_locales = locales_yml.to_h { [_1.keys[0], LocaleHelper.traverse(_1)] }
       @branches = @client.branches
       @branch_name = params[:id]
+      locales_yml = @client.pull(branch: @branch_name).values.map { YAML.load(_1) }
+      @code_value_by_locales = locales_yml.to_h { [_1.keys[0], LocaleHelper.traverse(_1)] }
     end
   end
 end
