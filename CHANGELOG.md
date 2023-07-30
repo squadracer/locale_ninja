@@ -2,11 +2,11 @@
 
 ## [Unreleased]
 
-## 0.1.1
+## 0.1.3
 
 ### Added
 
-- Nothing
+- Github Link
 
 ### Changed
 
@@ -22,6 +22,7 @@
 - Fix style
 - Fix dashboard branches count
 - Fix default sentence
+- Fix branches name
 
 ## 0.1.0
 
