@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     locale_ninja (0.1.0)
-      rails (>= 7.0.6)
-      tailwindcss-rails (>= 0.8.0)
+      rails (~> 7.0, >= 7.0.6)
+      tailwindcss-rails (~> 2.0, >= 2.0.0)
 
 GEM
   remote: https://rubygems.org/

@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.name        = 'locale_ninja'
   spec.version     = LocaleNinja::VERSION
   spec.authors     = ['Julien Marseille', 'Théo Dupuis', 'Pierre Fitoussi', 'Clément Avenel']
-  spec.email       = ['julien@squadracer.com', 'theo@squadracer.com', 'pierre@squadracer.com', 'clement@squadracer.com']
+  spec.email       = 'contact@squadracer.com'
   spec.homepage    = 'https://locale-ninja.osc-fr1.scalingo.io/'
   spec.summary     = 'A git based gem to manage translations in a Ruby on Rails app.'
-  spec.description = spec.summary
+  spec.description = 'LocaleNinja is a powerful Git-based gem for effortless translation management in Ruby on Rails apps.'
   spec.license     = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
@@ -26,6 +26,6 @@ Gem::Specification.new do |spec|
     Dir['{app,config,db,lib}/**/*', 'LICENSE', 'Rakefile', 'README.md']
   end
 
-  spec.add_dependency('rails', '>= 7.0.6')
-  spec.add_dependency('tailwindcss-rails', '>= 0.8.0')
+  spec.add_dependency('rails', '~> 7.0', '>= 7.0.6')
+  spec.add_dependency('tailwindcss-rails', '~> 2.0', '>= 2.0.0')
 end
