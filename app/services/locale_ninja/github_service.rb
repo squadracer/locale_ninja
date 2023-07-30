@@ -22,12 +22,14 @@ module LocaleNinja
       end.flatten
     end
 
-    def pull(file = locale_files_path)
+    def pull(file = locale_files_path, branch: 'translations')
+      branch = 'main' unless branch?(branch)
       repository = Octokit::Repository.new(repository_fullname)
-      file.index_with { |path| Base64.decode64(@client.contents(repository, path:).content) }
+      file.index_with { |path| Base64.decode64(@client.contents(repository, path:, ref: "heads/#{branch}").content) }
     end
 
     def push(file_path, content)
+      create_branch('main', 'translations') unless branch?('translations')
       begin
         sha = @client.content(repository_fullname, path: file_path, ref: 'heads/translations')[:sha]
       rescue Octokit::NotFound
@@ -62,6 +64,8 @@ module LocaleNinja
 
     def pull_request(branch_name)
       @client.create_pull_request(repository_fullname, 'main', branch_name, "translations #{Time.current}")
+    rescue Octokit::UnprocessableEntity
+      # If pull request already exists, do nothing
     end
   end
 end
