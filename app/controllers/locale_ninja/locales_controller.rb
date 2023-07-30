@@ -14,14 +14,14 @@ module LocaleNinja
     private_constant :CLIENT_SECRET
 
     def index
-      locales_yml = LocaleNinja::GithubService.new(access_token:).pull.values.map { YAML.load(_1) }
+      locales_yml = GithubService.new(access_token:).pull.values.map { YAML.load(_1) }
       @code_value_by_locales = locales_yml.to_h { [_1.keys[0], traverse(_1)] }
     end
 
     def show
       @locale = params[:locale]
 
-      service = LocaleNinja::GithubService.new(access_token: session[:access_token])
+      service = GithubService.new(access_token: session[:access_token])
       locale_files_path = service.locale_files_path.filter { |path| path.ends_with?("#{@locale}.yml") }
       hashes = service.pull(locale_files_path).transform_values { |file| YAML.load(file) }
       @translations = hashes.map { |path, hash| traverse(hash).to_h.transform_keys { |key| "#{path}$#{key}" } }.reduce(&:merge)
@@ -30,8 +30,8 @@ module LocaleNinja
 
     def update
       translation_keys = params[:val].permit!.to_h.compact_blank
-      yml = LocaleNinja::LocaleHelper.keys2yml(translation_keys)
-      service = LocaleNinja::GithubService.new(access_token: session[:access_token])
+      yml = LocaleHelper.keys2yml(translation_keys)
+      service = GithubService.new(access_token: session[:access_token])
       yml.each { |path, file| service.push(path, file) }
       service.pull_request('translations')
     end
