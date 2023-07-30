@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/squadracer/locale_ninja'
-  spec.metadata['changelog_uri'] = 'https://github.com/squadracer/locale_ninja/CHANGELOG.md'
+  spec.metadata['changelog_uri'] = 'https://github.com/squadracer/locale_ninja/blob/main/CHANGELOG.md'
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     Dir['{app,config,db,lib}/**/*', 'LICENSE', 'Rakefile', 'README.md']
