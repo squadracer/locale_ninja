@@ -12,7 +12,7 @@ gem 'sqlite3'
 
 gem 'sprockets-rails'
 
-gem 'octokit', '~> 5.0.0'
+gem 'octokit', '~> 5.0'
 
 gem 'httparty', '~> 0.21.0'
 
