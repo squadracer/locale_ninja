@@ -25,7 +25,15 @@ Or install it yourself as:
 ```bash
 $ gem install locale_ninja
 ```
-
+you will need to create a github app to allow your app to commit to your repo.
+callback URL is `/locale_ninja/github`
+once done, add this to your credentials
+```yaml
+github:
+    repository_name: owner/repository
+    client_secret: <40 bytes long secret key>
+    client_id: <20 bytes long id>
+```
 
 
 Parler de l'install des credentials, de la github app à setup, etc, etc....
