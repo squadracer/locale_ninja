@@ -8,28 +8,26 @@
   </div>
   <div class="flex flex-row gap-4 my-4">
     <div class="w-full p-8 space-y-8 text-center bg-white rounded-lg shadow-md">
-        <p class="font-medium text-gray-900 uppercase">Number of translations</p>
+        <p class="font-medium text-gray-900 uppercase">Number of branches</p>
 
         <h2 class="text-5xl font-bold uppercase">
-            <%= @yml_locales.size %>
+            <%= @branches_count %>
         </h2>
-
-        <p class="font-medium text-gray-900">Per month</p>
     </div>
       <div class="w-full p-8 space-y-8 text-center bg-white rounded-lg shadow-md">
-        <p class="font-medium text-gray-900 uppercase">Average completion</p>
+        <p class="font-medium text-gray-900 uppercase">Number of commits</p>
 
         <h2 class="text-5xl font-bold uppercase">
-            4051
+            <%= @commits_count%>
         </h2>
 
-        <p class="font-medium text-gray-900">Per month</p>
+        <p class="font-medium text-gray-900">last month</p>
     </div>
       <div class="w-full p-8 space-y-8 text-center bg-white rounded-lg shadow-md">
         <p class="font-medium text-gray-900 uppercase">Number of languages</p>
 
         <h2 class="text-5xl font-bold uppercase">
-            16
+            <%= @locales_count %>
         </h2>
     </div>
   </div>
