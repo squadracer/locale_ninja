@@ -12,7 +12,7 @@ module LocaleNinja
 
     def login
       code = params['code']
-      response = HTTParty.post('https://github.com/login/oauth/access_token',
+      response = ::HTTParty.post('https://github.com/login/oauth/access_token',
                                body: {
                                  client_id: CLIENT_ID,
                                  client_secret: CLIENT_SECRET,
