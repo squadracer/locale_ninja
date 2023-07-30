@@ -12,9 +12,9 @@ gem 'sqlite3'
 
 gem 'sprockets-rails'
 
-gem 'octokit', '~> 5.0'
+gem 'octokit', '~> 5.0', require: false
 
-gem 'httparty', '~> 0.21.0'
+gem 'httparty', '~> 0.21.0', require: false
 
 group :development, :test do
   gem 'pry-byebug'
