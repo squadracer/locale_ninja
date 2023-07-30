@@ -8,5 +8,6 @@ LocaleNinja::Engine.routes.draw do
   resources :branches, only: %i[index show] do
     resources :locales, only: %i[index show update], param: :locale
   end
-  get '/github', to: 'locales#github'
+  get '/github', to: 'session#login'
+  get '/logout', to: 'session#logout'
 end

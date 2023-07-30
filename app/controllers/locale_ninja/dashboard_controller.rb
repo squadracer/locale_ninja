@@ -5,7 +5,7 @@ module LocaleNinja
     before_action :set_client, only: [:index]
 
     def index
-      @yml_locales = @client.pull.values.map { YAML.load(_1) }
+      @yml_locales = @client.locale_files_path
     end
   end
 end

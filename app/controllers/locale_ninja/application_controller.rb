@@ -2,12 +2,18 @@
 
 module LocaleNinja
   class ApplicationController < ActionController::Base
-    before_action :authenticate!
+    before_action :authenticate!, skip: :authenticate!
+    rescue_from Octokit::Unauthorized, with: :clear_session
 
     CLIENT_ID = Rails.application.credentials.github.client_id
     private_constant :CLIENT_ID
 
     private
+
+    def clear_session
+      session.clear
+      redirect_to(dashboard_index_path)
+    end
 
     def set_client
       @client = GithubApiService.new(access_token:)

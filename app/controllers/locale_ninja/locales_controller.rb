@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module LocaleNinja
-  require 'httparty'
   require 'json'
   require 'cgi'
   class LocalesController < ApplicationController
@@ -29,20 +28,6 @@ module LocaleNinja
       yml = LocaleHelper.keys2yml(translation_keys)
       yml.each { |path, file| @client.push(path, file, branch: @branch_name) }
       @client.pull_request(@branch_name)
-    end
-
-    def github
-      code = params['code']
-      response = HTTParty.post('https://github.com/login/oauth/access_token',
-                               body: {
-                                 client_id: CLIENT_ID,
-                                 client_secret: CLIENT_SECRET,
-                                 code:
-                               }
-                              )
-      parsed = CGI.parse(response)
-      session[:access_token] = parsed['access_token'].first
-      redirect_to('/locale_ninja')
     end
   end
 end

@@ -20,5 +20,12 @@
                 <span class="mx-4 font-medium">Settings</span>
             </a>
         </nav>
+        <div class="flex flex-col">
+            <div class="flex items-center px-4 py-2 text-gray-600 rounded-md">
+                <img class="object-cover rounded-full h-9 w-9" src="<%= session.dig(:user,:avatar_url) %>" alt="avatar" />
+                <span class="font-medium mx-4 text-gray-600">@<%= session.dig(:user,:login) %></span>
+            </div>
+            <%= link_to 'Disconnect from Github', logout_path, class: "flex items-center px-4 text-gray-600 hover:underline" %>
+        <div>
     </div>
 </aside>
