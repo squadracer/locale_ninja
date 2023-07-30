@@ -25,6 +25,29 @@ module LocaleNinja
       end.uniq
     end
 
+    def self.all_keys_for_locales(github_service, locales, branch: 'translations')
+      locales_yml = github_service.pull(branch:).transform_values { |file| YAML.load(file) }
+      locales_list = locales_yml.values.map(&:keys).flatten.uniq
+      locales_yml.transform_values! { |hash| [hash.keys.first, traverse(hash.values.first).to_h] }
+      generic_keys = locales_yml.flat_map do |path, file|
+        path = path.gsub(/\b(#{locales_list.join('|')})\b/, '%<locale>s')
+        _, hash = file
+        hash.map { |key, _hash| "#{path}$%<locale>s.#{key}" }
+      end.uniq
+      translations = locales_yml.flat_map do |path, (locale, hash)|
+        hash.map do |key, value|
+          ["#{path}$#{locale}.#{key}", value]
+        end
+      end.to_h
+
+      locales.map do |locale|
+        generic_keys.to_h do |key|
+          locale_key = format(key, locale:)
+          [locale_key, translations[locale_key]]
+        end
+      end
+    end
+
     def self.missing_keys(locale, github_service, branch:)
       generic_keys = all_keys(github_service, branch:)
       locale_yml = pull_one_locale(locale, github_service, branch:)

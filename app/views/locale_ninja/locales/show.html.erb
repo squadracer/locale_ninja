@@ -5,10 +5,14 @@
   </div>
   <div class="py-8 my-8">
     <%= form_with url: branch_locale_path(@branch_name, @locale), method: :patch do |form| %>
-      <% @translations.each do |code, value| %>
+      <% @translations.each do |(target_key, target_value), (source_key, source_value)| %>
         <div class="mb-8">
-          <%= form.label "code", code.split('$').last, class: "block text-sm text-gray-500" %>
-          <%= form.text_field "val[#{code}]", value: value, class: "block  mt-2 w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" %>
+          <div class="flex">
+            <%= form.label "code", "Default sentence:", class: "block text-sm mr-1 text-gray-500 self-center" %>
+            <%= form.label "source_val", (source_value || ''), class: "block text-sm self-center" %>
+          </div>
+          <%= form.label "code", target_key.split('$').last, class: "block text-sm text-gray-500" %>
+          <%= form.text_field "val[#{target_key}]", value: target_value, class: "block  mt-2 w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" %>
         </div>
       <% end %>
       <%= form.submit "Enregistrer", class: "px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400" %>
