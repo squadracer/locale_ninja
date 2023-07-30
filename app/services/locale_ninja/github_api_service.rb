@@ -78,6 +78,10 @@ module LocaleNinja
       @branches ||= @client.branches(repository_fullname).map(&:name)
     end
 
+    def public_branches
+      branches.reject { |branch| branch.ends_with?('__translations')}
+    end
+
     def pull_request(branch_name)
       @client.create_pull_request(repository_fullname, branch_name, "#{branch_name}__translations", "translations #{Time.current}")
     rescue Octokit::UnprocessableEntity
