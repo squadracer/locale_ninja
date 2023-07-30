@@ -35,6 +35,19 @@ module LocaleNinja
       github_service.pull(locale_files_path).transform_values { |file| YAML.load(file) }
     end
 
+    def self.traverse(hash, parent_key = nil)
+      path = []
+      hash.each do |key, value|
+        current_key = parent_key ? "#{parent_key}.#{key}" : key.to_s
+        if value.is_a?(Hash)
+          path += traverse(value, current_key)
+        else
+          path << [current_key, value]
+        end
+      end
+      path
+    end
+
     def self.hash2keys(hash, parent_key = nil)
       keys = []
       hash.each do |key, value|
