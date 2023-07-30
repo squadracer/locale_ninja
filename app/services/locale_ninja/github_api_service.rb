@@ -79,7 +79,7 @@ module LocaleNinja
     end
 
     def public_branches
-      branches.reject { |branch| branch.ends_with?('__translations')}
+      branches.reject { |branch| branch.ends_with?('__translations') }
     end
 
     def pull_request(branch_name)
