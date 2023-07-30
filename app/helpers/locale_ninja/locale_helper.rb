@@ -12,7 +12,7 @@ module LocaleNinja
       end
     end
 
-    def self.get_all_keys(github_service)
+    def self.all_keys(github_service)
       locales_yml = github_service.pull.transform_values { |file| YAML.load(file) }
       locales_list = locales_yml.values.map(&:keys).flatten.uniq
       locales_yml.flat_map do |path, file|
@@ -21,16 +21,16 @@ module LocaleNinja
       end.uniq
     end
 
-    def self.get_missing_keys(locale, github_service)
-      generic_keys = get_all_keys(github_service)
-      locale_yml = get_one_locale(locale, github_service)
+    def self.missing_keys(locale, github_service)
+      generic_keys = all_keys(github_service)
+      locale_yml = pull_one_locale(locale, github_service)
       locale_keys = locale_yml.flat_map do |path, file|
         hash2keys(file).map { |key| "#{path}$#{key}" }
       end.uniq
-      generic_keys.map { |key| key.format(locale:) } - locale_keys
+      generic_keys.map { |key| format(key, locale:) } - locale_keys
     end
 
-    def self.get_one_locale(locale, github_service)
+    def self.pull_one_locale(locale, github_service)
       locale_files_path = github_service.locale_files_path.filter { |path| path.ends_with?("#{locale}.yml") }
       github_service.pull(locale_files_path).transform_values { |file| YAML.load(file) }
     end
