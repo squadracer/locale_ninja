@@ -1,8 +1,8 @@
 # 🥷 LocaleNinja
 
-Manage you translations directly in your application
+A git based gem to manage translations in your Ruby on Rails app.
 
-LocaleNinja simplifies the management of translations on a website. Unlike traditional solutions that require connecting to an external platform, LocaleNinja is installed directly in your project, allowing you to maintain full control over your translations without relying on a third-party service.
+LocaleNinja simplifies the management of translations on a website. Unlike traditional solutions that require connecting to an external platform, LocaleNinja is a Git-based gem  installed directly in your project, allowing you to maintain full control over your translations without relying on a third-party service.
 
 <br/>
 
@@ -51,31 +51,27 @@ Once done you will have access to your `client_id` and `client_secret`. You can 
 bin/rails credentials:edit
 ```
 
-And add this, in the editor :
+And add this, in the editor that just open-up :
 ```yaml
 github:
-    repository_name: repository_name
+    repository_name: organization/repository_name
     client_secret: <40 bytes long secret key>
     client_id: <20 bytes long id>
 ```
 
-You can then close the editor, this will generate a `master.key`file and a `credentials.yml.enc` file in the config folder.
+You can then close the editor, this will generate a `master.key`file and a `credentials.yml.enc` file in the config folder. Now your connexion with github is totally setup.
 
 <br/>
 
-Now your connexion with github is totaly setup 🎉
-
-<br/>
-
-You now just have to add this in your routes  :
+You now just have to add this in your routes :
 ```ruby
 #config/routes.rb
-mount LocaleNinja::Engine => '/locale_ninja
+mount LocaleNinja::Engine => '/locale_ninja'
 ```
 
 <br/>
 
-And you translation manager will be accesible at `your-domain-name/locale_ninja` or `localhost:3000/locale_ninja`
+Your  translation manager will be accesible at `your-domain-name/locale_ninja` or `localhost:3000/locale_ninja` 🎉
 
 
 ## 📄 Contributing
