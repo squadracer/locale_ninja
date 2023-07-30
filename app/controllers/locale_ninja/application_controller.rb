@@ -9,6 +9,10 @@ module LocaleNinja
 
     private
 
+    def set_client
+      @client = GithubService.new(access_token:)
+    end
+
     def access_token
       session[:access_token]
     end
