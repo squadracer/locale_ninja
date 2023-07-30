@@ -83,8 +83,6 @@ yarn-debug.log*
 /public/uploads
 *.log
 
-app/assets/builds/locale_ninja.css
-
 /config/credentials/development.key
 
 /config/credentials/production.key
