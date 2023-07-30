@@ -9,7 +9,9 @@
   </head>
   <body class="flex min-h-screen">
     <%= render "/components/sidebar" %>
-    <%= yield %>
+    <div class="ml-64 w-full">
+      <%= yield %>
+    </div>
     <%= render 'components/flashes' %>
   </body>
 </html>
