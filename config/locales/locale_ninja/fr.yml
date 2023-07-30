@@ -5,7 +5,7 @@ fr:
         actual_branch: Branche actuelle
     dashboard:
       index:
-        i18n_made_easy: Gérer Facilement l'internationalisation
+        i18n_made_easy: Gérer facilement l'internationalisation
         last_month:  le dernier mois
         manage_your_translations: Organisez vos traductions facilement. Plus de fichier excel ni de copier-coller. Concentrez-vous sur votre code
         number_of_branches: nombre de branches
@@ -13,7 +13,7 @@ fr:
         number_of_languages: nombre de langues
     locales:
       show:
-        default_sentence: Phrase d'origine
+        default_sentence: "Phrase d'origine:"
         missing_translations: Traductions manquantes
       update:
         error: La traduction n'a pas pu être mise à jour.
@@ -25,5 +25,5 @@ fr:
     sidebar:
       dashboard: Tableau de bord
       disconnect: Se déconnecter de GitHub
-      settings: paramètres
-      translations: traductions
+      settings: Paramètres
+      translations: Traductions
