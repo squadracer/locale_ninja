@@ -79,7 +79,7 @@ module LocaleNinja
     end
 
     def default_branch
-      %w[main master].find { |branch_name|branches.include?(branch_name) } || branches.first
+      %w[main master].find { |branch_name| branches.include?(branch_name) } || branches.first
     end
 
     def public_branches
