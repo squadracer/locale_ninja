@@ -4,10 +4,14 @@ Manage you translations directly in your application
 
 LocaleNinja simplifies the management of translations on a website. Unlike traditional solutions that require connecting to an external platform, LocaleNinja is installed directly in your project, allowing you to maintain full control over your translations without relying on a third-party service.
 
+<br/>
+
 ## ✨ Key Features
 **Streamlined Translation Management:** LocaleNinja provides a user-friendly interface to effortlessly handle all your website translations within the same project.
 
 **Seamless Git Integration:** LocaleNinja connects to your Git repository and automatically handles pull and push of translation files. This ensures smooth collaboration with developers and simplifies the process of updating translations.
+
+<br/>
 
 ## 💻 Installation
 Add this line to your application's Gemfile:
@@ -25,12 +29,31 @@ Or install it yourself as:
 ```bash
 $ gem install locale_ninja
 ```
-you will need to create a github app to allow your app to commit to your repo.
-callback URL is `/locale_ninja/github`
-once done, add this to your credentials
+
+<br/>
+
+## ⚙️ Setup
+
+To setup LocalNinja you will need to create a [github app](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app) installed on your repository, it will allow your app to commit to your repo. When you are on the github app form, here are some steps specfic to our application to follow :
+
+- In the "Identifying and authorizing users" section, your callback url will be : `your-domain-name.com/locale_ninja/github`
+- In the "Webhook" section switch off the "active" checkbox
+- In the "Permissions" section, you will have to:
+    - Switch "Content" permissions to "Read and write"
+    - Switch "Metadata" permissions to "Read-only"
+    - Switch "Pull requests" permissions to "Read-only"
+      
+<br/>
+
+Once done you will have access to your `client_id` and `client_secret`. You can then run :
+
+```sh
+bin/rails credentials:edit
+```
+
 ```yaml
 github:
-    repository_name: owner/repository
+    repository_name: repository_name
     client_secret: <40 bytes long secret key>
     client_id: <20 bytes long id>
 ```
