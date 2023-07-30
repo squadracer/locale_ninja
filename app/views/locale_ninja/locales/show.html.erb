@@ -1,7 +1,7 @@
 <div class="flex flex-col w-full p-8">
   <div class="flex justify-between items-center">
     <h1>Page de la langue  <%= country_flag(@locale) %></h1>
-    <div class="font-bold text-gray-400">Traductions manquantes : <%= @translations.count{|key, value| value.blank?} %></div>
+    <div class="font-bold text-gray-400"><%= t('.missing_translations') %> : <%= @translations.count{|key, value| value.blank?} %></div>
   </div>
   <div class="py-8 my-8">
     <%= form_with url: branch_locale_path(@branch_name, @locale), method: :patch do |form| %>
@@ -9,7 +9,7 @@
         <div class="mb-10">
           <%= form.label "code", target_key.split('$').last, class: "block text-xs text-gray-500" %>
           <div class="flex">
-            <%= form.label "code", "Default sentence:", class: "block mr-1 text-gray-500 self-center" %>
+            <%= form.label "code", t('.default_sentence'), class: "block mr-1 text-gray-500 self-center" %>
             <%= form.label "source_val", (source_value || ''), class: "block self-center" %>
           </div>
           <%= form.text_field "val[#{target_key}]", value: target_value, class: "block  mt-2 w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" %>
