@@ -2,6 +2,9 @@ PATH
   remote: .
   specs:
     locale_ninja (0.1.0)
+      faraday-retry (~> 2.2, >= 2.2.0)
+      httparty (~> 0.21, >= 0.21.0)
+      octokit (~> 5, >= 5.0.0)
       rails (~> 7.0, >= 7.0.6)
       tailwindcss-rails (~> 2.0, >= 2.0.0)
 
@@ -264,10 +267,7 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
-  faraday-retry
-  httparty
   locale_ninja!
-  octokit (~> 5.0)
   pry-byebug
   puma
   rspec-rails (~> 6.0.0)
