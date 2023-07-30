@@ -1,7 +1,9 @@
-<div class="flex flex-col w-full p-8">
+<div class="flex flex-col w-full pt-8 px-8">
   <%= render '/components/branch_select' %>
 
-  <h1 class="text-dark-blue mb-8">Actual branch : <%= @branch_name %></h1>
+  <h1 class="text-xl text-dark-blue mb-8">Actual branch :
+   <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"><%= @branch_name %></span>
+  </h1>
   <div class="flex flex-wrap">
     <% @completion_by_locale.each do |locale, completion| %>
       <%= link_to branch_locale_path(@branch_name, locale), class: "w-48 max-w-sm px-4 py-3 mr-8 mb-8 bg-white rounded-md shadow-md border-solid border-t-4 border-blue-600" do %> 
