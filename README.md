@@ -67,7 +67,7 @@ Now your connexion with github is totaly setup 🎉
 
 <br/>
 
-You now juste have to add this in your routes  :
+You now just have to add this in your routes  :
 ```ruby
 #config/routes.rb
 mount LocaleNinja::Engine => '/locale_ninja
@@ -75,7 +75,7 @@ mount LocaleNinja::Engine => '/locale_ninja
 
 <br/>
 
-And you translation manager will be accesible at 'your-domain-name/locale_ninja' or 'localhost:3000/locale_ninja'
+And you translation manager will be accesible at `your-domain-name/locale_ninja` or `localhost:3000/locale_ninja`
 
 
 ## 📄 Contributing
