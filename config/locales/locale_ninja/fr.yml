@@ -6,7 +6,7 @@ fr:
     dashboard:
       index:
         i18n_made_easy: Gérer facilement l'internationalisation
-        last_month:  le dernier mois
+        last_month: le dernier mois
         manage_your_translations: Organisez vos traductions facilement. Plus de fichier excel ni de copier-coller. Concentrez-vous sur votre code
         number_of_branches: nombre de branches
         number_of_commits: nombre de commits
@@ -20,7 +20,7 @@ fr:
         success: La traduction a été mise à jour.
   components:
     branch_select:
-      branch_select: Choix de la branche
+      branch_select: "Choix de la branche:"
       fetch_branch: Choisir cette branche
     sidebar:
       dashboard: Tableau de bord

@@ -2,7 +2,7 @@ en:
   locale_ninja:
     branches:
       show:
-        actual_branch: Actual Branch
+        actual_branch: Actual branch
     dashboard:
       index:
         i18n_made_easy: Internationalization made easy ✌️
@@ -20,7 +20,7 @@ en:
         success: Translation has been updated.
   components:
     branch_select:
-      branch_select: Branch select
+      branch_select: "Branch select:"
       fetch_branch: Fetch this branch
     sidebar:
       dashboard: Dashboard
