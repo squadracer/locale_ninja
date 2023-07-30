@@ -30,7 +30,6 @@ module LocaleNinja
     def pull(files = nil, branch: 'translations')
       files ||= locale_files_path(branch:)
       branch = translation_branch(branch) if branch?(translation_branch(branch))
-      raise('This branch does not exist') unless branch?(branch)
 
       files.index_with { |path| Base64.decode64(@client.contents(repository_fullname, path:, ref: "heads/#{branch}").content) }
     end
