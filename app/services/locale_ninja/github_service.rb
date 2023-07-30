@@ -30,8 +30,17 @@ module LocaleNinja
 
     def push(file_path, content)
       create_branch('main', 'translations') unless branch?('translations')
-      sha = @client.content(repository_fullname, path: file_path, ref: 'heads/translations')[:sha]
+      begin
+        sha = @client.content(repository_fullname, path: file_path, ref: 'heads/translations')[:sha]
+      rescue Octokit::NotFound
+        create_file(file_path, content, branch: 'translations')
+        return
+      end
       @client.update_contents(repository_fullname, file_path, "translations #{DateTime.current}", sha, content, branch: 'translations')
+    end
+
+    def create_file(file_path, content, branch: 'translations')
+      @client.create_contents(repository_fullname, file_path, "translations #{DateTime.current}", content, branch:)
     end
 
     def create_branch(parent_branch, child_branch)

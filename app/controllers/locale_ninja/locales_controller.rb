@@ -25,10 +25,11 @@ module LocaleNinja
       locale_files_path = service.locale_files_path.filter { |path| path.ends_with?("#{@locale}.yml") }
       hashes = service.pull(locale_files_path).transform_values { |file| YAML.load(file) }
       @translations = hashes.map { |path, hash| traverse(hash).to_h.transform_keys { |key| "#{path}$#{key}" } }.reduce(&:merge)
+      LocaleHelper.missing_keys(@locale, service).each { |key| @translations[key] = '' }
     end
 
     def update
-      translation_keys = params[:val].permit!.to_h
+      translation_keys = params[:val].permit!.to_h.compact_blank
       yml = LocaleNinja::LocaleHelper.keys2yml(translation_keys)
       service = LocaleNinja::GithubService.new(access_token: session[:access_token])
       yml.each { |path, file| service.push(path, file) }
