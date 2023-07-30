@@ -70,23 +70,31 @@ module LocaleNinja
     end
 
     def branch?(branch_name)
-      branches.include?(branch_name)
+      branch_names.include?(branch_name)
     end
 
     def repository_fullname
       @repository_fullname ||= REPOSITORY_FULLNAME
     end
 
+    def repo_infomation
+      @client.repository(repository_fullname).to_h.slice(:full_name, :html_url)
+    end
+
     def branches
-      @branches ||= @client.branches(repository_fullname).map(&:name)
+      @branches ||= @client.branches(repository_fullname)
+    end
+
+    def branch_names
+      @branch_names ||= branches.map(&:name)
     end
 
     def default_branch
-      %w[main master].find { |branch_name| branches.include?(branch_name) } || branches.first
+      %w[main master].find { |branch_name| branch_names.include?(branch_name) } || branch_names.first
     end
 
-    def public_branches
-      branches.reject { |branch| branch.ends_with?('__translations') }
+    def public_branch_names
+      branch_names.reject { |branch| branch.ends_with?('__translations') }
     end
 
     def pull_request(branch_name)

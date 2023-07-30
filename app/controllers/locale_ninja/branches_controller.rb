@@ -13,7 +13,7 @@ module LocaleNinja
     end
 
     def show
-      @branches = @client.public_branches
+      @branches = @client.public_branch_names
       @branch_name = params[:id]
       locales = LocaleHelper.locales(@client)
       all_translations = LocaleHelper.all_keys_for_locales(@client, locales, branch: @branch_name)
