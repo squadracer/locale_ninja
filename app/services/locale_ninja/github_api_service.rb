@@ -78,6 +78,10 @@ module LocaleNinja
       @branches ||= @client.branches(repository_fullname).map(&:name)
     end
 
+    def default_branch
+      %w[main master].find { |branch_name| branches.include?(branch_name) } || branches.first
+    end
+
     def public_branches
       branches.reject { |branch| branch.ends_with?('__translations') }
     end

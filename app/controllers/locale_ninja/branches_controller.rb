@@ -5,7 +5,7 @@ module LocaleNinja
     before_action :set_client, only: %i[index show]
 
     def index
-      @branches = @client.public_branches
+      redirect_to(branch_path(@client.default_branch))
     end
 
     def select
