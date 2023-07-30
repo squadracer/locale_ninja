@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email       = 'contact@squadracer.com'
   spec.homepage    = 'https://locale-ninja.osc-fr1.scalingo.io/'
   spec.summary     = 'A git based gem to manage translations in a Ruby on Rails app.'
-  spec.description = 'LocaleNinja simplifies the management of translations on a website. Unlike traditional solutions that require connecting to an external platform, LocaleNinja is installed directly in your project, allowing you to maintain full control over your translations without relying on a third-party service.'
+  spec.description = 'LocaleNinja is a powerful Git-based gem for effortless translation management in Ruby on Rails apps.'
   spec.license     = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
