@@ -11,5 +11,41 @@ module LocaleNinja
         end.to_yaml
       end
     end
+
+    def self.get_all_keys(github_service)
+      locales_yml = github_service.pull.transform_values { |file| YAML.load(file) }
+      locales_list = locales_yml.values.map(&:keys).flatten.uniq
+      locales_yml.flat_map do |path, file| 
+        path = path.gsub(/\b(#{locales_list.join('|')})\b/, '%<locale>s')
+        hash2keys(file.values.first).map { |key| "#{path}$%<locale>s.#{key}" }
+      end.uniq
+    end
+
+    def self.get_missing_keys(locale, github_service)
+      generic_keys = get_all_keys(github_service)
+      locale_yml = get_one_locale(locale, github_service)
+      locale_keys = locale_yml.flat_map do |path, file|
+        hash2keys(file).map { |key| "#{path}$#{key}" }
+      end.uniq
+      generic_keys.map{ |key| key.format(locale:) } - locale_keys
+    end
+
+    def self.get_one_locale(locale, github_service)
+      locale_files_path = github_service.locale_files_path.filter { |path| path.ends_with?("#{locale}.yml") }
+      hashes = github_service.pull(locale_files_path).transform_values { |file| YAML.load(file) }
+    end
+
+    def self.hash2keys(hash, parent_key = nil)
+      keys = []
+      hash.each do |key, value|
+        current_key = parent_key ? "#{parent_key}.#{key}" : key.to_s
+        if value.is_a?(Hash)
+          keys += hash2keys(value, current_key)
+        else
+          keys << current_key
+        end
+      end
+      keys
+    end
   end
 end
