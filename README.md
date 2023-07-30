@@ -1,4 +1,6 @@
 # 🥷 LocaleNinja
+[![Gem Version](https://badge.fury.io/rb/locale_ninja.svg)](https://badge.fury.io/rb/locale_ninja)
+[![Ruby on Rails CI](https://github.com/squadracer/locale_ninja/actions/workflows/rubyonrails.yml/badge.svg)](https://github.com/squadracer/locale_ninja/actions/workflows/rubyonrails.yml)
 
 A Git-based gem to manage translations in your Ruby on Rails app.
 
