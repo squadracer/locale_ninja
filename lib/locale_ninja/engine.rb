@@ -5,7 +5,7 @@ module LocaleNinja
     isolate_namespace LocaleNinja
 
     initializer 'assets' do |app|
-      app.config.assets.precompile += %w[locale_ninja_manifest]
+      app.config.assets.precompile += %w[locale_ninja_manifest locale_ninja/application.css locale_ninja/application.js]
     end
   end
 end
