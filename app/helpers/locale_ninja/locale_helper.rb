@@ -12,8 +12,12 @@ module LocaleNinja
       end
     end
 
+    def self.locales(github_service)
+      github_service.locale_files_path.map { |path| path.scan(/\w+(?=\.yml)/).first }.uniq
+    end
+
     def self.locales_count(github_service)
-      github_service.locale_files_path.uniq { |x| x.scan(/\w.yml/) }.size
+      locales(github_service).count
     end
 
     def self.all_keys(github_service, branch: 'translations')

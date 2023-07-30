@@ -15,8 +15,12 @@ module LocaleNinja
     def show
       @branches = @client.public_branches
       @branch_name = params[:id]
-      locales_yml = @client.pull(branch: @branch_name).values.map { YAML.load(_1) }
-      @code_value_by_locales = locales_yml.to_h { [_1.keys[0], LocaleHelper.traverse(_1)] }
+      locales = LocaleHelper.locales(@client)
+      all_translations = LocaleHelper.all_keys_for_locales(@client, locales, branch: @branch_name)
+
+      @completion_by_locale = locales.zip(all_translations).to_h do |locale, translations|
+        [locale, 100 * translations.values.count(&:present?) / translations.count]
+      end
     end
   end
 end

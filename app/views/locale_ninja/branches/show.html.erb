@@ -3,7 +3,7 @@
 
   <h1 class="text-dark-blue mb-8">Actual branch : <%= @branch_name %></h1>
   <div class="flex flex-wrap">
-    <% @code_value_by_locales.each do |locale, *values| %>
+    <% @completion_by_locale.each do |locale, completion| %>
       <%= link_to branch_locale_path(@branch_name, locale), class: "w-48 max-w-sm px-4 py-3 mr-8 mb-8 bg-white rounded-md shadow-md border-solid border-t-4 border-blue-600" do %> 
         <div class="flex flex-col justify-between">
             <div>
@@ -13,7 +13,7 @@
               </div>
             </div>
             <div class="w-full bg-gray-200 rounded-full h-2.5">
-              <div class="bg-blue-600 h-2.5 rounded-full" style="width: <%= (values[0].count{|key, value| value.present?}.to_f / values[0].count.to_f) * 100 %>%"></div>
+              <div class="bg-blue-600 h-2.5 rounded-full" style="width: <%= completion %>%"></div>
             </div>
         </div>
       <% end %>
