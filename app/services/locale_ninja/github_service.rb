@@ -13,7 +13,7 @@ module LocaleNinja
     end
 
     def locale_files_path(dir = 'config/locales')
-      @client.contents(repository_fullname, path: dir).map do |file|
+      @client.contents(repository_fullname, path: dir, ref: 'heads/translations').map do |file|
         if file.type == 'dir'
           locale_files_path(file.path)
         else
