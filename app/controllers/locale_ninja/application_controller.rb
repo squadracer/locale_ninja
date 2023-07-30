@@ -4,7 +4,7 @@ module LocaleNinja
   class ApplicationController < ActionController::Base
     add_flash_types :alert, :info, :error, :warning, :success
     before_action :authenticate!, skip: :authenticate!
-    rescue_from Octokit::Unauthorized, with: :clear_session
+    rescue_from ::Octokit::Unauthorized, with: :clear_session
 
     CLIENT_ID = Rails.application.credentials.github.client_id
     private_constant :CLIENT_ID

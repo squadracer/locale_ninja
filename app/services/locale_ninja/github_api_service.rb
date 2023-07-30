@@ -6,7 +6,7 @@ module LocaleNinja
     private_constant :REPOSITORY_FULLNAME
 
     def initialize(access_token:)
-      @client = Octokit::Client.new(access_token:)
+      @client = ::Octokit::Client.new(access_token:)
     end
 
     attr_reader :client
@@ -52,7 +52,7 @@ module LocaleNinja
 
       begin
         sha = @client.content(repository_fullname, path: file_path, ref: "heads/#{branch}")[:sha]
-      rescue Octokit::NotFound
+      rescue ::Octokit::NotFound
         create_file(file_path, content, branch:)
         return
       end
@@ -91,7 +91,7 @@ module LocaleNinja
 
     def pull_request(branch_name)
       @client.create_pull_request(repository_fullname, branch_name, "#{branch_name}__translations", "translations #{Time.current}")
-    rescue Octokit::UnprocessableEntity
+    rescue ::Octokit::UnprocessableEntity
       # If pull request already exists, do nothing
     end
   end
