@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module LocaleNinja
+  require 'octokit'
+  require 'httparty'
   class ApplicationController < ActionController::Base
     add_flash_types :alert, :info, :error, :warning, :success
     before_action :authenticate!, skip: :authenticate!
