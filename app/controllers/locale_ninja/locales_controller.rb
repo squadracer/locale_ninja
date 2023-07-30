@@ -28,7 +28,12 @@ module LocaleNinja
     end
 
     def update
-      params[:val]
+      translation_keys = params[:val].permit!.to_h
+      locale = params[:locale]
+      yml = LocaleNinja::LocaleHelper.keys2yml(translation_keys)
+      service = LocaleNinja::GithubService.new(access_token: session[:access_token])
+      service.push("config/locales/#{locale}.yml", yml)
+      service.pull_request('translations')
     end
 
     def traverse(hash, parent_key = nil)

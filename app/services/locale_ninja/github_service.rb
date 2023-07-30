@@ -22,7 +22,7 @@ module LocaleNinja
     end
 
     def push(file_path, content)
-      sha = @client.content(repository_fullname, path: file_path)[:sha]
+      sha = @client.content(repository_fullname, path: file_path, ref: 'heads/translations')[:sha]
       @client.update_contents(repository_fullname, file_path, "translations #{DateTime.current}", sha, content, branch: 'translations')
     end
 
