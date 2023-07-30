@@ -2,6 +2,7 @@
 
 module LocaleNinja
   class ApplicationController < ActionController::Base
+    add_flash_types :alert, :info, :error, :warning, :success
     before_action :authenticate!, skip: :authenticate!
     rescue_from Octokit::Unauthorized, with: :clear_session
 
