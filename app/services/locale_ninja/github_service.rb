@@ -24,7 +24,7 @@ module LocaleNinja
 
     def pull(file = locale_files_path)
       repository = Octokit::Repository.new(repository_fullname)
-      file.map { |path| Base64.decode64(@client.contents(repository, path:).content) }
+      file.index_with { |path| Base64.decode64(@client.contents(repository, path:).content) }
     end
 
     def push(file_path, content)
