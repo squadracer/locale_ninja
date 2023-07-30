@@ -73,15 +73,6 @@ mount LocaleNinja::Engine => '/locale_ninja'
 
 Your  translation manager will be accessible at `your-domain-name/locale_ninja` or `localhost:3000/locale_ninja` 🎉
 
-
-## 📄 Contributing
-Contribution directions go here.
-```bash
-  bin/dev
-```
-to start the development environment.
-
-
 ## 👥 Contributors 
 
 <table>
@@ -92,7 +83,6 @@ to start the development environment.
       <td align="center" valign="top" width="25%"><a href="https://www.linkedin.com/in/pierre-fitoussi-267133135/"><img src="https://avatars.githubusercontent.com/u/79254731?v=4" width="100px;" alt="Pierre Fitoussi"/><br /><sub><b>Pierre Fitoussi</b></sub></a></td>
       <td align="center" valign="top" width="25%"><a href="https://twitter.com/masterpoo_dev"><img src="https://avatars.githubusercontent.com/u/92919588?v=4" width="100px;" alt="Théo Dupuis"/><br /><sub><b>Théo Dupuis</b></sub></a></td>
     </tr>
-</table>
 </table>
 
 
