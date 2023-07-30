@@ -1,1 +1,1 @@
-web: bundle exec rake tailwind_engine_build && bundle exec rails server
+web: bundle exec rake app:tailwind_engine_build && bundle exec rails server
