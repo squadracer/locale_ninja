@@ -1,6 +1,6 @@
 # 🥷 LocaleNinja
 
-A git based gem to manage translations in your Ruby on Rails app.
+A Git-based gem to manage translations in your Ruby on Rails app.
 
 LocaleNinja simplifies the management of translations on a website. Unlike traditional solutions that require connecting to an external platform, LocaleNinja is a Git-based gem  installed directly in your project, allowing you to maintain full control over your translations without relying on a third-party service.
 
@@ -34,7 +34,7 @@ $ gem install locale_ninja
 
 ## ⚙️ Setup
 
-To setup LocalNinja you will need to create a [github app](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app) installed on your repository, it will allow your app to commit to your repo. When you are on the github app form, here are some steps specfic to our application to follow :
+To setup LocalNinja you will need to create a [github app](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app) in your repository, it will allow your app to commit to your repo. When you are on the github app form, here are some steps specific to our application to follow :
 
 - In the "Identifying and authorizing users" section, your callback url will be : `your-domain-name.com/locale_ninja/github`
 - In the "Webhook" section switch off the "active" checkbox
@@ -71,7 +71,7 @@ mount LocaleNinja::Engine => '/locale_ninja'
 
 <br/>
 
-Your  translation manager will be accesible at `your-domain-name/locale_ninja` or `localhost:3000/locale_ninja` 🎉
+Your  translation manager will be accessible at `your-domain-name/locale_ninja` or `localhost:3000/locale_ninja` 🎉
 
 
 ## 📄 Contributing
