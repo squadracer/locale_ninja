@@ -1,5 +1,8 @@
 # LocaleNinja
-LocaleNinja is a free and open-source library that simplifies the management of translations on a website. Unlike traditional solutions that require connecting to an external platform, LocaleNinja is installed directly in your project, allowing you to maintain full control over your translations without relying on a third-party service.
+
+Manage you translations directly in your application
+
+LocaleNinja simplifies the management of translations on a website. Unlike traditional solutions that require connecting to an external platform, LocaleNinja is installed directly in your project, allowing you to maintain full control over your translations without relying on a third-party service.
 
 ## Key Features
 Streamlined Translation Management: LocaleNinja provides a user-friendly interface to effortlessly handle all your website translations within the same project.
