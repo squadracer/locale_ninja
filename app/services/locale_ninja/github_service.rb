@@ -54,7 +54,7 @@ module LocaleNinja
     end
 
     def pull_request(branch_name)
-      @client.create_pull_request(repository_fullname, 'main', branch_name, "translations #{Time.current}") 
+      @client.create_pull_request(repository_fullname, 'main', branch_name, "translations #{Time.current}")
     rescue Octokit::UnprocessableEntity
       # If pull request already exists, do nothing
     end
