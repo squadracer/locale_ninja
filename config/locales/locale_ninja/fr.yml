@@ -13,6 +13,7 @@ fr:
         number_of_languages: nombre de langues
     locales:
       show:
+        locale_page: Page de la langue
         default_sentence: "Phrase d'origine:"
         missing_translations: Traductions manquantes
       update:
