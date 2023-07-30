@@ -51,6 +51,7 @@ Once done you will have access to your `client_id` and `client_secret`. You can 
 bin/rails credentials:edit
 ```
 
+And add this, in the editor :
 ```yaml
 github:
     repository_name: repository_name
@@ -58,9 +59,23 @@ github:
     client_id: <20 bytes long id>
 ```
 
+You can then close the editor, this will generate a `master.key`file and a `credentials.yml.enc` file in the config folder.
 
-Parler de l'install des credentials, de la github app à setup, etc, etc....
+<br/>
 
+Now your connexion with github is totaly setup 🎉
+
+<br/>
+
+You now juste have to add this in your routes  :
+```ruby
+#config/routes.rb
+mount LocaleNinja::Engine => '/locale_ninja
+```
+
+<br/>
+
+And you translation manager will be accesible at 'your-domain-name/locale_ninja' or 'localhost:3000/locale_ninja'
 
 
 ## 📄 Contributing
