@@ -1,6 +1,6 @@
 <div class="flex flex-col w-full p-8">
   <div class="flex justify-between items-center">
-    <h1>Page de la langue  <%= country_flag(@locale) %></h1>
+    <h1><%= t('lang_page') %>  <%= country_flag(@locale) %></h1>
     <div class="font-bold text-gray-400"><%= t('.missing_translations') %> : <%= @translations.count{|key, value| value.blank?} %></div>
   </div>
   <div class="py-8 my-8">

@@ -13,6 +13,7 @@ en:
         number_of_languages: Number of locales
     locales:
       show:
+        lang_page: locale page
         default_sentence: 'Default sentence:'
         missing_translations: Missing translations
       update:
