@@ -2,8 +2,7 @@
 
 module LocaleNinja
   class SessionController < ApplicationController
-    skip_before_action :authenticate!, only: %i[login]
-    before_action :set_client, only: [:logout]
+    skip_before_action :authenticate!, only: %i[login logout]
 
     CLIENT_ID = Rails.application.credentials.github.client_id
     CLIENT_SECRET = Rails.application.credentials.github.client_secret

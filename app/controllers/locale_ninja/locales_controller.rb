@@ -4,7 +4,6 @@ module LocaleNinja
   require 'json'
   require 'cgi'
   class LocalesController < ApplicationController
-    skip_before_action :authenticate!, only: %i[github]
     before_action :set_client, only: %i[show update]
 
     CLIENT_ID = Rails.application.credentials.github.client_id
