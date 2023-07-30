@@ -2,8 +2,10 @@
 
 module LocaleNinja
   class DashboardController < ApplicationController
+    before_action :set_client, only: [:index]
+
     def index
-      @yml_locales = GithubService.new(access_token:).pull.values.map { YAML.load(_1) }
+      @yml_locales = @client.pull.values.map { YAML.load(_1) }
     end
   end
 end

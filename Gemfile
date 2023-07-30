@@ -14,7 +14,7 @@ gem 'sprockets-rails'
 
 gem 'faraday-retry'
 gem 'httparty'
-gem 'octokit', '~> 5.0'
+gem 'octokit', '~> 5.0', require: false
 
 group :development, :test do
   gem 'pry-byebug'

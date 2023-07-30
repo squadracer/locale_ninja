@@ -6,6 +6,7 @@ module LocaleNinja
   require 'cgi'
   class LocalesController < ApplicationController
     skip_before_action :authenticate!, only: %i[github]
+    before_action :set_client, only: %i[show update]
 
     CLIENT_ID = Rails.application.credentials.github.client_id
     CLIENT_SECRET = Rails.application.credentials.github.client_secret
@@ -16,19 +17,17 @@ module LocaleNinja
     def show
       @locale = params[:locale]
       @branch_name = params[:branch_id]
-      service = LocaleNinja::GithubService.new(access_token: session[:access_token])
-      locale_files_path = service.locale_files_path.filter { |path| path.ends_with?("#{@locale}.yml") }
-      hashes = service.pull(locale_files_path).transform_values { |file| YAML.load(file) }
+      locale_files_path = @client.locale_files_path.filter { |path| path.ends_with?("#{@locale}.yml") }
+      hashes = @client.pull(locale_files_path).transform_values { |file| YAML.load(file) }
       @translations = hashes.map { |path, hash| LocaleHelper.traverse(hash).to_h.transform_keys { |key| "#{path}$#{key}" } }.reduce(&:merge)
-      LocaleHelper.missing_keys(@locale, service).each { |key| @translations[key] = '' }
+      LocaleHelper.missing_keys(@locale, @client).each { |key| @translations[key] = '' }
     end
 
     def update
       translation_keys = params[:val].permit!.to_h.compact_blank
       yml = LocaleHelper.keys2yml(translation_keys)
-      service = GithubService.new(access_token: session[:access_token])
-      yml.each { |path, file| service.push(path, file) }
-      service.pull_request('translations')
+      yml.each { |path, file| @client.push(path, file) }
+      @client.pull_request('translations')
     end
 
     def github

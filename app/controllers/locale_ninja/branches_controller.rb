@@ -2,8 +2,10 @@
 
 module LocaleNinja
   class BranchesController < ApplicationController
+    before_action :set_client, only: %i[index show]
+
     def index
-      @branches = GithubService.new(access_token:).branches
+      @branches = @client.branches
     end
 
     def select
@@ -11,9 +13,9 @@ module LocaleNinja
     end
 
     def show
-      locales_yml = LocaleNinja::GithubService.new(access_token:).pull.values.map { YAML.load(_1) }
+      locales_yml = @client.pull.values.map { YAML.load(_1) }
       @code_value_by_locales = locales_yml.to_h { [_1.keys[0], LocaleHelper.traverse(_1)] }
-      @branches = LocaleNinja::GithubService.new(access_token:).branches
+      @branches = @client.branches
       @branch_name = params[:id]
     end
   end
