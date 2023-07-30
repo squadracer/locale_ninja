@@ -2,6 +2,7 @@
 
 module LocaleNinja
   class ApplicationController < ActionController::Base
+    add_flash_types :alert, :info, :error, :warning, :success
     before_action :authenticate!
 
     CLIENT_ID = Rails.application.credentials.github.client_id

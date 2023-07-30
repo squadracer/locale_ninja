@@ -29,6 +29,9 @@ module LocaleNinja
       yml = LocaleHelper.keys2yml(translation_keys)
       yml.each { |path, file| @client.push(path, file, branch: @branch_name) }
       @client.pull_request(@branch_name)
+      flash[:success] = t('.success')
+
+      redirect_to(branch_path(@branch_name))
     end
 
     def github
