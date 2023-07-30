@@ -7,11 +7,12 @@ module LocaleNinja
     def index
       @locales_count = LocaleHelper.locales_count(@client)
       @branches_count = @client.branches.count
-      translation_branches = @client.branches.filter { |branch| branch.ends_with?('__translations')}
+      translation_branches = @client.branches.filter { |branch| branch.ends_with?('__translations') }
       @commits_count = translation_branches.sum do |branch|
         @client.client.commits_since(@client.repository_fullname,
-          1.month.ago.strftime('%Y-%m-%d'),
-          sha_or_branch: branch).count 
+                       1.month.ago.strftime('%Y-%m-%d'),
+                       sha_or_branch: branch
+        ).count
       end
     end
   end
