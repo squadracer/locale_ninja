@@ -1,7 +1,7 @@
 <div class="flex flex-col w-full pt-8 px-8">
   <%= render '/components/branch_select' %>
 
-  <h1 class="text-xl text-dark-blue mb-8">Actual branch :
+  <h1 class="text-xl text-dark-blue mb-8"><%= t('.actual_branch') %>:
    <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded"><%= @branch_name %></span>
   </h1>
   <div class="flex flex-wrap">

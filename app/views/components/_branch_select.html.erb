@@ -1,10 +1,9 @@
 <div class="mb-8 py-4 px-6 rounded-md border bg-white">
-  <!-- <%= render partial: "/components/table" %> -->
   <%= form_with url: branch_select_path, class: "w-full flex justify-between" do |f| %>
     <div class="flex items-center">
-      <label class="branch-selection text-lg mr-4">Choose a branch:</label>
+      <label class="branch-selection text-lg mr-4"><%= t('.branch_select') %></label>
       <%= f.select :branch_id, options_for_select(@branches, @branch_name || 'main'), {}, onchange: 'selectionChange(this)', class: "w-80 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" %>
     </div>
-    <%= f.submit "Fetch this branch", class: "text-white bg-blue-600 px-4 py-3 font-bold rounded cursor-pointer" %>
+    <%= f.submit t('.fetch_branch'), class: "text-white bg-blue-600 px-4 py-3 font-bold rounded cursor-pointer" %>
   <% end %>
 </div>
