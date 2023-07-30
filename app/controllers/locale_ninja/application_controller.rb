@@ -20,7 +20,7 @@ module LocaleNinja
     def authenticate!
       return if access_token
 
-      redirect_to("https://github.com/login/oauth/authorize?scope=repo,user&client_id=#{CLIENT_ID}")
+      redirect_to("https://github.com/login/oauth/authorize?scope=repo,user&client_id=#{CLIENT_ID}", allow_other_host: true)
     end
   end
 end
