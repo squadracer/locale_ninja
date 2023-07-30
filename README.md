@@ -39,5 +39,20 @@ Contribution directions go here.
 ```
 to start the development environment.
 
+
+## 👥 Contributors 
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="25%"><a href="https://twitter.com/julienmarseil"><img src="https://avatars.githubusercontent.com/u/18447285?v=4" width="100px;" alt="Julien Marseille"/><br /><sub><b>Julien Marseille</b></sub></a></td>
+      <td align="center" valign="top" width="25%"><a href="https://twitter.com/ClementAvenel"><img src="https://avatars.githubusercontent.com/u/29872940?v=4" width="100px;" alt="Clément Avenel"/><br /><sub><b>Clément Avenel</b></sub></a></td>
+      <td align="center" valign="top" width="25%"><a href="https://www.linkedin.com/in/pierre-fitoussi-267133135/"><img src="https://avatars.githubusercontent.com/u/79254731?v=4" width="100px;" alt="Pierre Fitoussi"/><br /><sub><b>Pierre Fitoussi</b></sub></a></td>
+      <td align="center" valign="top" width="25%"><a href="https://twitter.com/masterpoo_dev"><img src="https://avatars.githubusercontent.com/u/92919588?v=4" width="100px;" alt="Théo Dupuis"/><br /><sub><b>Théo Dupuis</b></sub></a></td>
+    </tr>
+</table>
+</table>
+
+
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
