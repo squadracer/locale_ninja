@@ -12,8 +12,14 @@ module LocaleNinja
       @client = Octokit::Client.new(access_token:)
     end
 
-    def locale_files_path
-      @client.contents(repository_fullname, path: 'config/locales').map(&:path)
+    def locale_files_path(dir = 'config/locales')
+      @client.contents(repository_fullname, path: dir).map do |file|
+        if file.type == 'dir'
+          locale_files_path(file.path)
+        else
+          file.path
+        end
+      end.flatten
     end
 
     def pull(file = locale_files_path)
