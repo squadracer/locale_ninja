@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency('faraday-retry', '~> 2.2', '>= 2.2.0')
   spec.add_dependency('httparty', '~> 0.21', '>= 0.21.0')
-  spec.add_dependency('octokit', '~> 5', '>= 5.0.0')
+  spec.add_dependency('octokit', '~> 5.0', '>= 5.0')
   spec.add_dependency('rails', '~> 7.0', '>= 7.0.6')
   spec.add_dependency('tailwindcss-rails', '~> 2.0', '>= 2.0.0')
 end

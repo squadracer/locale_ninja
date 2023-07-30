@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 module LocaleNinja
-  require 'httparty'
   require 'json'
   require 'cgi'
   class LocalesController < ApplicationController
-    skip_before_action :authenticate!, only: %i[github]
     before_action :set_client, only: %i[show update]
 
     CLIENT_ID = Rails.application.credentials.github.client_id
@@ -32,20 +30,6 @@ module LocaleNinja
       flash[:success] = t('.success')
 
       redirect_to(branch_path(@branch_name))
-    end
-
-    def github
-      code = params['code']
-      response = HTTParty.post('https://github.com/login/oauth/access_token',
-                               body: {
-                                 client_id: CLIENT_ID,
-                                 client_secret: CLIENT_SECRET,
-                                 code:
-                               }
-                              )
-      parsed = CGI.parse(response)
-      session[:access_token] = parsed['access_token'].first
-      redirect_to('/locale_ninja')
     end
   end
 end

@@ -2,14 +2,15 @@
 
 module LocaleNinja
   class GithubApiService
-    require 'octokit'
-
     REPOSITORY_FULLNAME = Rails.application.credentials.github.repository_name
-
     private_constant :REPOSITORY_FULLNAME
 
     def initialize(access_token:)
       @client = Octokit::Client.new(access_token:)
+    end
+
+    def user
+      @client.user
     end
 
     def translation_branch(branch)
