@@ -5,6 +5,8 @@
 
 A Git-based gem to manage translations in your Ruby on Rails app.
 
+Demo : https://ninja-local-test.osc-fr1.scalingo.io/
+
 LocaleNinja simplifies the management of translations on a website. Unlike traditional solutions that require connecting to an external platform, LocaleNinja is a Git-based gem  installed directly in your project, allowing you to maintain full control over your translations without relying on a third-party service.
 
 <br/>
