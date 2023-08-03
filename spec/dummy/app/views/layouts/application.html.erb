@@ -11,8 +11,10 @@
   </head>
 
   <body>
-    <main class="flex w-full min-h-screen">
+    <main class="flex flex-col w-full min-h-screen">
+      <%= render "components/navbar" %>
       <%= yield %>
+      <%= render "components/footer" %>
     </main>
   </body>
 </html>

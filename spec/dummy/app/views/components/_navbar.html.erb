@@ -1,0 +1,15 @@
+<header class="fixed w-full text-gray-600 body-font bg-white">
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a class="flex title-font font-medium items-center text-gray-900 md:mb-0">
+      <span class="text-2xl">🥷</span>
+      <span class="ml-3 text-xl">Locale Ninja</span>
+    </a>
+    <nav class="hidden md:ml-auto md:flex flex-wrap items-center text-base justify-center">
+      <%= link_to "Documentation", 'https://github.com/squadracer/locale_ninja', class: "mr-5 hover:text-gray-900", target: "_blank" %>
+      <%= link_to "Report an issue", 'https://github.com/squadracer/locale_ninja/issues/new', class: "mr-5 hover:text-gray-900", target: "_blank" %>
+    </nav>
+    <%= link_to "Get Started", 'https://github.com/squadracer/locale_ninja', class: "hidden md:inline-flex text-white bg-amber-500 border-0 py-2 px-6 focus:outline-none hover:bg-amber-600 rounded text-lg" %>
+    <%= link_to "Demo", '/locale_ninja', class: "hidden ml-4 md:inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg" %>
+  </div>
+  <%= render 'components/fork_corner' %>
+</header>
