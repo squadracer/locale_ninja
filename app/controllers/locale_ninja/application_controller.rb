@@ -3,7 +3,7 @@
 module LocaleNinja
   require 'octokit'
   require 'httparty'
-  class ApplicationController < ActionController::Base
+  class ApplicationController < ::ApplicationController
     add_flash_types :alert, :info, :error, :warning, :success
     before_action :authenticate!, skip: :authenticate!
     rescue_from ::Octokit::Unauthorized, with: :clear_session
@@ -23,13 +23,13 @@ module LocaleNinja
     end
 
     def access_token
-      session[:access_token]
+      session.dig(:access, :access_token)
     end
 
     def authenticate!
       return if access_token
 
-      redirect_to("https://github.com/login/oauth/authorize?scope=repo,user&client_id=#{CLIENT_ID}", allow_other_host: true)
+      redirect_to("https://github.com/login/oauth/authorize?&client_id=#{CLIENT_ID}")
     end
   end
 end
