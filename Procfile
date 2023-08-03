@@ -1,1 +1,1 @@
-web: bundle exec rake app:assets:precompile && bundle exec rails server
+web: bundle exec rake app:precompile_engine_and_dummy_assets && bundle exec rails server

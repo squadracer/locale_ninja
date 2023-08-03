@@ -19,3 +19,8 @@ task tailwind_engine_build: :environment do
          -c #{LocaleNinja::Engine.root.join('config/tailwind.config.js')} \
          --minify"
 end
+
+task precompile_engine_and_dummy_assets: :environment do
+  system('rails app:assets:precompile')
+  system('cd spec/dummy/app && rails assets:precompile')
+end
