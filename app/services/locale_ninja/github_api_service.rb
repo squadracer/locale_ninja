@@ -19,22 +19,24 @@ module LocaleNinja
       branch.ends_with?('__translations') ? branch : "#{branch}__translations"
     end
 
-    def locale_files_path(dir = 'config/locales', branch: 'translations')
+    def locale_files(dir = 'config/locales', branch: 'translations')
       branch = translation_branch(branch) if branch?(translation_branch(branch))
-      @client.contents(repository_fullname, path: dir, ref: "heads/#{branch}").map do |file|
-        if file.type == 'dir'
-          locale_files_path(file.path, branch:)
-        else
-          file.path
-        end
-      end.flatten
+      @client.tree(repository_fullname, "heads/#{branch}", recursive: true).tree.select do |file|
+        file.type == 'blob' && file.path.include?(dir)
+      end
     end
 
-    def pull(files = nil, branch: 'translations')
-      files ||= locale_files_path(branch:)
-      branch = translation_branch(branch) if branch?(translation_branch(branch))
+    def locale_files_path(branch: 'translations')
+      locale_files(branch:).map(&:path)
+    end
 
-      files.index_with { |path| Base64.decode64(@client.contents(repository_fullname, path:, ref: "heads/#{branch}").content) }
+    def pull(branch: 'translations')
+      result = {}
+      locale_files(branch:).each do |file|
+        content = Base64.decode64(@client.blob(repository_fullname, file.sha).content)
+        result[file.path] = content
+      end
+      result
     end
 
     def create_translation_branch(branch)
@@ -77,7 +79,7 @@ module LocaleNinja
       @repository_fullname ||= REPOSITORY_FULLNAME
     end
 
-    def repo_infomation
+    def repo_information
       @client.repository(repository_fullname).to_h.slice(:full_name, :html_url)
     end
 

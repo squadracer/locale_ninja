@@ -12,8 +12,8 @@ module LocaleNinja
       end
     end
 
-    def self.locales(github_service)
-      github_service.locale_files_path.map { |path| path.scan(/\w+(?=\.yml)/).first }.uniq
+    def self.locales(github_service, branch: 'translations')
+      github_service.locale_files_path(branch:).map { |path| path.scan(/\w+(?=\.yml)/).first }.uniq
     end
 
     def self.locales_count(github_service)
@@ -71,7 +71,7 @@ module LocaleNinja
       hash.each do |key, value|
         current_key = parent_key ? "#{parent_key}.#{key}" : key.to_s
         if value.is_a?(Hash)
-          path += traverse(value, current_key)
+          path.concat(traverse(value, current_key))
         else
           path << [current_key, value]
         end
@@ -84,7 +84,7 @@ module LocaleNinja
       hash.each do |key, value|
         current_key = parent_key ? "#{parent_key}.#{key}" : key.to_s
         if value.is_a?(Hash)
-          keys += hash2keys(value, current_key)
+          keys.concat(hash2keys(value, current_key))
         else
           keys << current_key
         end
