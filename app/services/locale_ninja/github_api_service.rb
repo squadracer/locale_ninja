@@ -20,8 +20,10 @@ module LocaleNinja
     end
 
     def locale_files(dir = 'config/locales', branch: 'translations')
+      return @locale_files if @locale_files.present?
+
       branch = translation_branch(branch) if branch?(translation_branch(branch))
-      @client.tree(repository_fullname, "heads/#{branch}", recursive: true).tree.select do |file|
+      @locale_files = @client.tree(repository_fullname, "heads/#{branch}", recursive: true).tree.select do |file|
         file.type == 'blob' && file.path.include?(dir)
       end
     end
