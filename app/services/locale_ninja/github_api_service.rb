@@ -31,12 +31,10 @@ module LocaleNinja
     end
 
     def pull(branch: 'translations')
-      result = {}
-      locale_files(branch:).each do |file|
+      locale_files(branch:).to_h do |file|
         content = Base64.decode64(@client.blob(repository_fullname, file.sha).content)
-        result[file.path] = content
+        [file.path, content]
       end
-      result
     end
 
     def create_translation_branch(branch)
