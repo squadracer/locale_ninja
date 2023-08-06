@@ -7,10 +7,10 @@ module LocaleNinja
     def index
       @locales_count = LocaleHelper.locales_count(@client)
       @repo = @client.repo_information
-      translation_branches = @client.branches.filter { |branch| branch.ends_with?('__translations') }
+      translation_branches = @client.branches.filter { |branch| branch[:name].ends_with?(GithubApiService::TRANSLATIONS_SUFFIX) }
       @branches_count = @client.branches.count - translation_branches.count
       @commits_count = translation_branches.sum do |branch|
-        @client.client.commits_since(@client.repository_fullname,
+        @client.client.commits_since(GithubApiService::REPOSITORY_FULLNAME,
                                      1.month.ago.strftime('%Y-%m-%d'),
                                      sha_or_branch: branch
                                     ).count
