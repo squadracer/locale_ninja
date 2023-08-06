@@ -21,12 +21,12 @@ gem 'httparty', '~> 0.21.0', require: false
 group :development, :test do
   gem 'pry-byebug'
   gem 'rack-mini-profiler'
-  gem 'stackprof'
   gem 'rspec-rails', '~> 6.0.0'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'stackprof' # used with rack-mini-profiler to generate flamegraph
 end
 
 group :development do
