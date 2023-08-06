@@ -71,7 +71,7 @@ module LocaleNinja
       hash.each do |key, value|
         current_key = parent_key ? "#{parent_key}.#{key}" : key.to_s
         if value.is_a?(Hash)
-          path += traverse(value, current_key)
+          path.concat(traverse(value, current_key))
         else
           path << [current_key, value]
         end
@@ -84,7 +84,7 @@ module LocaleNinja
       hash.each do |key, value|
         current_key = parent_key ? "#{parent_key}.#{key}" : key.to_s
         if value.is_a?(Hash)
-          keys += hash2keys(value, current_key)
+          keys.concat(hash2keys(value, current_key))
         else
           keys << current_key
         end
