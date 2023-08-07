@@ -5,8 +5,8 @@ module LocaleNinja
     REPOSITORY_FULLNAME = Rails.application.credentials.github.repository_name
     TRANSLATIONS_SUFFIX = '__translations'
 
-    public_constant :REPOSITORY_FULLNAME
-    public_constant :TRANSLATIONS_SUFFIX
+    private_constant :REPOSITORY_FULLNAME
+    private_constant :TRANSLATIONS_SUFFIX
 
     def initialize(access_token:)
       @client = ::Octokit::Client.new(access_token:)
@@ -14,10 +14,19 @@ module LocaleNinja
 
     attr_reader :client
 
-    delegate :user, :repository, :update_contents, :create_contents, :ref, :content, :blob, :tree, to: :@client
+    delegate :user, to: :@client
+    delegate :commits_since, :repository, :update_contents, :create_contents, :ref, :content, :blob, :tree, to: :@client, private: true
 
     def repo_information
       repository(REPOSITORY_FULLNAME).to_h.slice(:full_name, :html_url)
+    end
+
+    def commits_count(branch: 'translations')
+      commits_since(REPOSITORY_FULLNAME, 1.month.ago.strftime('%Y-%m-%d'), sha_or_branch: branch).count
+    end
+
+    def total_translation_commits_count
+      translation_branch_names.sum { |branch| commits_count(branch:) }
     end
 
     def branches
@@ -33,7 +42,11 @@ module LocaleNinja
     end
 
     def public_branch_names
-      branch_names.reject { |branch| branch.ends_with?(TRANSLATIONS_SUFFIX) }
+      branch_names.reject { |branch| translation_branch?(branch) }
+    end
+
+    def translation_branch_names
+      branch_names.filter { |branch| translation_branch?(branch) }
     end
 
     def locale_files(dir = 'config/locales', branch: 'translations')
@@ -81,12 +94,16 @@ module LocaleNinja
       branch_names.include?(branch_name)
     end
 
+    def translation_branch?(branch_name)
+      branch_name.ends_with?(TRANSLATIONS_SUFFIX)
+    end
+
     def translation_branch(branch)
-      branch.ends_with?(TRANSLATIONS_SUFFIX) ? branch : "#{branch}#{TRANSLATIONS_SUFFIX}"
+      translation_branch?(branch) ? branch : "#{branch}#{TRANSLATIONS_SUFFIX}"
     end
 
     def create_translation_branch(branch)
-      return branch if branch.ends_with?(TRANSLATIONS_SUFFIX)
+      return branch if translation_branch?(branch)
 
       translation_branch = "#{branch}#{TRANSLATIONS_SUFFIX}"
       return translation_branch if branch?(translation_branch)

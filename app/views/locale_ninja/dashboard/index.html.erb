@@ -8,28 +8,18 @@
     </div>
   </div>
   <div class="flex flex-row gap-4 my-4">
-    <div class="w-full p-8 space-y-8 text-center bg-white rounded-lg shadow-md">
-        <p class="font-medium text-gray-900 uppercase"><%= t('.number_of_branches') %></p>
-
-        <h2 class="text-5xl font-bold uppercase">
-            <%= @branches_count %>
-        </h2>
-    </div>
+    <% { number_of_branches: @branches_count, number_of_commits: @total_translation_commits_count, number_of_languages: @locales_count }.each do |title, count| %>
       <div class="w-full p-8 space-y-8 text-center bg-white rounded-lg shadow-md">
-        <p class="font-medium text-gray-900 uppercase"><%= t('.number_of_commits') %></p>
+          <p class="font-medium text-gray-900 uppercase"><%= t(".#{title}") %></p>
 
-        <h2 class="text-5xl font-bold uppercase">
-            <%= @commits_count%>
-        </h2>
+          <h2 class="text-5xl font-bold uppercase">
+              <%= count %>
+          </h2>
 
-        <p class="font-medium text-gray-900"><%= t('.last_month') %></p>
-    </div>
-      <div class="w-full p-8 space-y-8 text-center bg-white rounded-lg shadow-md">
-        <p class="font-medium text-gray-900 uppercase"><%= t('.number_of_languages') %></p>
-
-        <h2 class="text-5xl font-bold uppercase">
-            <%= @locales_count %>
-        </h2>
-    </div>
+          <% if title == :number_of_commits %>
+            <p class="font-medium text-gray-900"><%= t('.last_month') %></p>
+          <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
