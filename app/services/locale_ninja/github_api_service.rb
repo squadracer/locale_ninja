@@ -15,7 +15,7 @@ module LocaleNinja
     attr_reader :client
 
     delegate :user, to: :@client
-    delegate :blob, :commits_since, :content, :create_contents, :ref, :repository, :tree, :update_contents, :create_ref, to: :@client, private: true
+    delegate :blob, :commits_since, :content, :create_contents, :ref, :repository, :tree, :update_contents, :create_ref, :create_pull_request, to: :@client, private: true
 
     def repo_information
       repository(REPOSITORY_FULLNAME).to_h.slice(:full_name, :html_url)

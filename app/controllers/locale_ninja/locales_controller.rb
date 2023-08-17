@@ -15,7 +15,7 @@ module LocaleNinja
     def show
       @locale = params[:locale]
       @branch_name = params[:branch_id]
-      @source, @target = LocaleHelper.all_keys_for_locales(@client, [I18n.default_locale.to_s, @locale], branch: @branch_name)
+      @source, @target = LocaleHelper.all_keys_for_locales(@client.pull(branch: @branch_name), [I18n.default_locale.to_s, @locale])
       @translations = @target.zip(@source)
     end
 
