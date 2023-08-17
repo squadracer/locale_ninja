@@ -15,8 +15,8 @@ module LocaleNinja
     def show
       @branches = public_branch_names
       @branch_name = params[:id]
-      locales = LocaleHelper.locales(@client.locale_files_path(branch: branch_to_pull(@branch_name)))
-      all_translations = LocaleHelper.all_keys_for_locales(@client.pull(branch: @branch_name), locales)
+      locales = locales(@client.locale_files_path(branch: branch_to_pull(@branch_name)))
+      all_translations = all_keys_for_locales(@client.pull(branch: @branch_name), locales)
 
       @completion_by_locale = locales.zip(all_translations).to_h do |locale, translations|
         [locale, 100 * translations.values.count(&:present?) / translations.count]

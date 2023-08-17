@@ -15,14 +15,14 @@ module LocaleNinja
     def show
       @locale = params[:locale]
       @branch_name = params[:branch_id]
-      @source, @target = LocaleHelper.all_keys_for_locales(@client.pull(branch: branch_to_pull(@branch_name)), [I18n.default_locale.to_s, @locale])
+      @source, @target = all_keys_for_locales(@client.pull(branch: branch_to_pull(@branch_name)), [I18n.default_locale.to_s, @locale])
       @translations = @target.zip(@source)
     end
 
     def update
       @branch_name = params[:branch_id]
       translation_keys = params[:val].permit!.to_h.compact_blank
-      yml = LocaleHelper.keys2yml(translation_keys)
+      yml = keys2yml(translation_keys)
       translation_branch = translation_branch(@branch_name)
       session[:branch_names] << @client.create_translation_branch(@branch_name, translation_branch) unless branch?(translation_branch)
       @client.push_modification(translation_branch, yml)
