@@ -15,7 +15,7 @@ module LocaleNinja
     attr_reader :client
 
     delegate :user, to: :@client
-    delegate :blob, :commits_since, :content, :create_contents, :ref, :repository, :tree, :update_contents, to: :@client, private: true
+    delegate :blob, :commits_since, :content, :create_contents, :ref, :repository, :tree, :update_contents, :create_ref, to: :@client, private: true
 
     def repo_information
       repository(REPOSITORY_FULLNAME).to_h.slice(:full_name, :html_url)
@@ -83,7 +83,7 @@ module LocaleNinja
 
     def pull_request(branch_name)
       branch = "#{branch_name}#{TRANSLATIONS_SUFFIX}"
-      create_contents(REPOSITORY_FULLNAME, branch_name, branch, "translations #{Time.current}")
+      create_pull_request(REPOSITORY_FULLNAME, branch_name, "heads/#{branch}", "Translations for #{branch_name}")
     rescue Octokit::UnprocessableEntity
       # If pull request already exists, do nothing
     end
