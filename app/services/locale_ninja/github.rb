@@ -31,6 +31,10 @@ module LocaleNinja
         @instance.get('/user').body
       end
 
+      def branches
+        @instance.get("/repos/#{REPOSITORY_FULLNAME}/branches").body
+      end
+
       def self.get_access_token(code)
         client = Faraday.new do |r|
           r.request(:json)
