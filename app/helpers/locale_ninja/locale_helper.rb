@@ -39,29 +39,6 @@ module LocaleNinja
       end
     end
 
-    # def all_keys(github_service, branch: 'translations')
-    #   locales_yml = github_service.pull(branch:).transform_values { |file| YAML.load(file) }
-    #   locales_list = locales_yml.values.map(&:keys).flatten.uniq
-    #   locales_yml.flat_map do |path, file|
-    #     path = path.gsub(/\b(#{locales_list.join('|')})\b/, '%<locale>s')
-    #     hash2keys(file.values.first).map { |key| "#{path}$%<locale>s.#{key}" }
-    #   end.uniq
-    # end
-
-    # def missing_keys(locale, github_service, branch:)
-    #   generic_keys = all_keys(github_service, branch:)
-    #   locale_yml = pull_one_locale(locale, github_service, branch:)
-    #   locale_keys = locale_yml.flat_map do |path, file|
-    #     hash2keys(file).map { |key| "#{path}$#{key}" }
-    #   end.uniq
-    #   generic_keys.map { |key| format(key, locale:) } - locale_keys
-    # end
-
-    # def pull_one_locale(locale, github_service, branch: 'translations')
-    #   locale_files_path = github_service.locale_files_path(branch:).filter { |path| path.ends_with?("#{locale}.yml") }
-    #   github_service.pull(locale_files_path, branch:).transform_values { |file| YAML.load(file) }
-    # end
-
     def traverse(hash, parent_key = nil)
       path = []
       hash.each do |key, value|

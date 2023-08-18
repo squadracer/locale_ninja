@@ -4,7 +4,6 @@ module LocaleNinja
   require 'octokit'
   require 'httparty'
   class ApplicationController < ::ApplicationController
-    include BranchHelper
     include LocaleHelper
 
     add_flash_types :alert, :info, :error, :warning, :success
