@@ -9,7 +9,8 @@ module LocaleNinja
       tokens = Github::Client.get_access_token(code)
       session[:access] = tokens
       access_token = session.dig(:access, :access_token)
-      session[:user] = Github::Client.new(access_token).user.slice(:avatar_url, :id, :login)
+      user = Github::Client.new(access_token).user
+      session[:user] = user.slice(:avatar_url, :id, :login)
 
       redirect_to(root_path)
     end
