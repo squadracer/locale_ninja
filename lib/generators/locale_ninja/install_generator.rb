@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails/generators'
+require_relative '../../locale_ninja/plateform_container'
 
 module LocaleNinja
   module Generators
@@ -9,7 +10,8 @@ module LocaleNinja
 
       def prompt_mount_path
         default_mount_path = '/locale_ninja'
-        @mount_path = ask("Enter the mount path for LocaleNinja engine (default: #{default_mount_path}):")
+        @mount_path = ask("Enter the mount path for LocaleNinja engine (default: #{default_mount_path}):").strip
+        # repo = ask('Enter the repository fullname (ex: squadracer/locale_ninja)')
         @mount_path = default_mount_path if @mount_path.blank?
       end
 

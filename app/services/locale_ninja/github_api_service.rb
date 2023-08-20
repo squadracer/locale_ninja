@@ -8,15 +8,14 @@ module LocaleNinja
     private_constant :REPOSITORY_FULLNAME
     private_constant :TRANSLATIONS_SUFFIX
 
-    def initialize(access_token:)
-      @client = ::Octokit::Client.new(access_token:)
-    end
-
-    attr_reader :client
-
     delegate :user, :branches, to: :@client
     delegate :blob, :commits_since, :content, :create_contents, :ref, :repository, :tree, :update_contents, :create_ref,
              to: :@client, private: true
+
+    def token(access_token)
+      @token = access_token
+      @client = ::Octokit::Client.new(access_token:)
+    end
 
     def repo_information
       repository(REPOSITORY_FULLNAME).to_h.slice(:full_name, :html_url)
@@ -34,24 +33,12 @@ module LocaleNinja
       pulled_branches_names.intersection(%w[main master]).first || pulled_branches_names.first
     end
 
-    def pulled_branches
-      @pulled_branches ||= branches(REPOSITORY_FULLNAME)
-    end
-
-    def pulled_branches_names
-      @pulled_branches_names ||= pulled_branches.map { |branch| GitBranchName.new(branch.name) }
-    end
-
     def displayable_branch_names
       pulled_branches_names.reject(&:translation?)
     end
 
     def translation_branch_names
       pulled_branches_names.filter(&:translation?)
-    end
-
-    def branch_pulled?(branch_name)
-      pulled_branches_names.include?(branch_name)
     end
 
     def select_branch_to_pull(selected_branch)
@@ -73,6 +60,10 @@ module LocaleNinja
       create_branch(branch) unless branch_pulled?(branch.translation)
       push_modification(branch.translation, yml)
       create_pull_request(branch)
+    end
+
+    def pulled_branches_names
+      @pulled_branches_names ||= pulled_branches.map { |branch| GitBranchName.new(branch.name) }
     end
 
     private
@@ -113,5 +104,17 @@ module LocaleNinja
     def create_file(file_path, content, branch: 'translations')
       create_contents(REPOSITORY_FULLNAME, file_path, "translations #{DateTime.current}", content, branch:)
     end
+
+    def pulled_branches
+      @pulled_branches ||= branches(REPOSITORY_FULLNAME)
+    end
+  end
+
+  def branch_pulled?(branch_name)
+    pulled_branches_names.include?(branch_name)
+  end
+
+  def select_branch_to_pull(selected_branch)
+    pulled_branches_names.find { |branch| branch == selected_branch.translation } || selected_branch.base
   end
 end

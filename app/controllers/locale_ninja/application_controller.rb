@@ -22,7 +22,8 @@ module LocaleNinja
     end
 
     def set_client
-      @client = GithubApiService.new(access_token:)
+      @client = GitFacade.new
+      @client.token(access_token)
     end
 
     def access_token

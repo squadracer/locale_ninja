@@ -6,8 +6,7 @@ module LocaleNinja
 
     def login
       code = params['code']
-      tokens = Github::Client.get_access_token(code)
-      session[:access] = tokens
+      session[:access] = Github::Client.get_access_token(code)
       access_token = session.dig(:access, :access_token)
       user = Github::Client.new(access_token).user
       session[:user] = user.slice(:avatar_url, :id, :login)
