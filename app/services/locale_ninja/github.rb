@@ -2,9 +2,9 @@
 
 module LocaleNinja
   module Github
-    CLIENT_ID = Rails.application.credentials.github.client_id
-    CLIENT_SECRET = Rails.application.credentials.github.client_secret
-    REPOSITORY_FULLNAME = Rails.application.credentials.github.repository_name
+    CLIENT_ID = LocaleNinja.configuration.client_id
+    CLIENT_SECRET = LocaleNinja.configuration.client_secret
+    REPOSITORY_FULLNAME = LocaleNinja.configuration.repository
 
     BASE_URL = 'https://github.com'
     BASE_API = 'https://api.github.com'

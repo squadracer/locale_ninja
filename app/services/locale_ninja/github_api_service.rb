@@ -2,7 +2,7 @@
 
 module LocaleNinja
   class GithubApiService
-    REPOSITORY_FULLNAME = Rails.application.credentials.github.repository_name
+    REPOSITORY_FULLNAME = LocaleNinja.configuration.repository
     TRANSLATIONS_SUFFIX = '__translations'
 
     private_constant :REPOSITORY_FULLNAME

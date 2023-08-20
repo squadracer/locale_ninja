@@ -6,8 +6,8 @@ module LocaleNinja
   class LocalesController < ApplicationController
     before_action :set_client, only: %i[show update]
 
-    CLIENT_ID = Rails.application.credentials.github.client_id
-    CLIENT_SECRET = Rails.application.credentials.github.client_secret
+    CLIENT_ID = LocaleNinja.configuration.client_id
+    CLIENT_SECRET = LocaleNinja.configuration.client_secret
 
     private_constant :CLIENT_ID
     private_constant :CLIENT_SECRET

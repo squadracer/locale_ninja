@@ -7,8 +7,6 @@ ruby '3.2.2'
 
 gemspec
 gem 'async-http-faraday'
-gem 'dry-auto_inject'
-gem 'dry-container'
 gem 'faraday'
 gem 'httparty', '~> 0.21.0', require: false
 gem 'octokit', '~> 5.0', require: false

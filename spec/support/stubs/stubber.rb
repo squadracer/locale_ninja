@@ -2,9 +2,9 @@
 
 module Stubber
   GITHUB_API_URL = 'https://api.github.com'
-  REPOSITORY_FULLNAME = Rails.application.credentials.github.repository_name
-  CLIENT_ID = Rails.application.credentials.github.client_id
-  CLIENT_SECRET = Rails.application.credentials.github.client_secret
+  REPOSITORY_FULLNAME = LocaleNinja.configuration.repository
+  CLIENT_ID = LocaleNinja.configuration.client_id
+  CLIENT_SECRET = LocaleNinja.configuration.client_secret
 
   private_constant :GITHUB_API_URL
   private_constant :REPOSITORY_FULLNAME

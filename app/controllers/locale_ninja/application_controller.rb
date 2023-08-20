@@ -10,7 +10,7 @@ module LocaleNinja
     before_action :authenticate!, skip: :authenticate!
     rescue_from ::Octokit::Unauthorized, with: :clear_session
 
-    CLIENT_ID = Rails.application.credentials.github.client_id
+    CLIENT_ID = LocaleNinja.configuration.client_id
 
     private_constant :CLIENT_ID
 
@@ -22,7 +22,7 @@ module LocaleNinja
     end
 
     def set_client
-      @client = GitFacade.new
+      @client = LocaleNinja.configuration.service.call.new
       @client.token(access_token)
     end
 
