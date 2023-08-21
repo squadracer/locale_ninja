@@ -6,9 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 
 gemspec
-gem 'async-http-faraday'
-gem 'faraday'
-gem 'httparty', '~> 0.21.0', require: false
+
 gem 'octokit', '~> 5.0', require: false
 gem 'puma'
 gem 'sprockets-rails'
