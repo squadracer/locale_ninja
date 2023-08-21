@@ -100,6 +100,7 @@ module LocaleNinja
     def create_pull_request(branch)
       @client.create_pull_request(REPOSITORY_FULLNAME, branch, branch.translation, "Translations for #{branch}")
     rescue Octokit::UnprocessableEntity
+      # If pull request already exists, do nothing
     end
 
     def create_branch(branch)

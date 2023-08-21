@@ -26,16 +26,15 @@ module Factory
   def recursive_tree_result
     {
       tree: [
-        double('Sawyer::Resource', {
+        {
           path: 'config/locales/it/it.yml',
           mode: '100644',
           type: 'blob',
           sha: 'e9101db78943e1f2916e29f5b5bf49715600fc6d',
           size: 37,
           url: 'https://api.github.com/repos/squadracer/locale-ninja-test/git/blobs/e9101db78943e1f2916e29f5b5bf49715600fc6d'
-        }
-        ),
-        double('Sawyer::Resource', {
+        },
+        {
           path: 'config/locales/animals.it.yml',
           mode: '100644',
           type: 'blob',
@@ -43,7 +42,6 @@ module Factory
           size: 21,
           url: 'https://api.github.com/repos/squadracer/locale-ninja-test/git/blobs/7702efcf72e9ca309b8bfc02bb9f12dd89076cff'
         }
-        )
       ]
     }.to_json
   end

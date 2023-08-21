@@ -50,30 +50,33 @@ To setup LocalNinja you will need to create a [github app](https://docs.github.c
       
 <br/>
 
-Once done you will have access to your `client_id` and `client_secret`. You can then run :
+Once done you will have access to your `CLIENT_ID` and `CLIENT_SECRET`. You can then run :
 
 ```sh
-bin/rails credentials:edit
+bin/rails g locale_ninja:install
 ```
 
-And add this, in the editor that just open-up :
-```yaml
-github:
-    repository_name: organization/repository_name
-    client_secret: <40 bytes long secret key>
-    client_id: <20 bytes long id>
+Follow instructions.
+This should create `config/initializers/locale_ninja.rb` :
+```rb
+LocaleNinja.configure do |config|
+  config.plateform = :github
+  config.repository = 'organisation/repository'
+  config.branch_suffix = '__translations'
+  config.client_id = 'CLIENT_ID'
+  config.client_secret = 'CLIENT_SECRET'
+end
 ```
-
-You can then close the editor, this will generate a `master.key`file and a `credentials.yml.enc` file in the config folder. Now your connexion with github is totally setup.
-
+We recommend to use rails credentials system to store your `CLIENT_SECRET`.
 <br/>
+For more info, check the rails guide [10 Environmental Security](https://edgeguides.rubyonrails.org/security.html#environmental-security).
+
 
 You now just have to add this in your routes :
 ```ruby
 #config/routes.rb
 mount LocaleNinja::Engine => '/locale_ninja'
 ```
-
 <br/>
 
 Your  translation manager will be accessible at `your-domain-name/locale_ninja` or `localhost:3000/locale_ninja` 🎉

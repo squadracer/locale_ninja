@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-#require_relative '../../app/services/locale_ninja/github_api_service'
-
 module LocaleNinja
   class Configuration
     class PlateformMisMatch < StandardError; end
