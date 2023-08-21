@@ -9,6 +9,7 @@
 /spec/dummy/storage/
 /spec/dummy/tmp/
 /spec/dummy/config/credentials/*.key
+/.vscode/
 
 /config/master.key
 /config/credentials.yml*

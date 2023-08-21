@@ -1,5 +1,0 @@
-{
-  "ruby.rubocop.configFilePath": ".rubocop.yml",
-  "ruby.rubocop.executePath": "/Users/piera/.rbenv/shims/",
-  "ruby.rubocop.useBundler": true
-}
