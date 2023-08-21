@@ -7,11 +7,11 @@ module LocaleNinja
     class PlateformMisMatch < StandardError; end
 
     PLATEFORM_SERVICE_MAP = {
-      github: -> { LocaleNinja::GithubApiService }
+      github: -> { LocaleNinja::GithubService }
     }.freeze
     private_constant :PLATEFORM_SERVICE_MAP
 
-    attr_accessor :repository, :client_id, :client_secret
+    attr_accessor :repository, :client_id, :client_secret, :branch_suffix
     attr_reader :service
 
     def plateform=(plateform)

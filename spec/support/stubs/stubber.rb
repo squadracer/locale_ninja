@@ -9,11 +9,11 @@ module Stubber
   def access_token_stub
     stub_request(:post, 'https://github.com/login/oauth/access_token')
       .with(
-        body: '{"code":"123456","client_id":123456,"client_secret":1234567890}',
+        body: '{"code":"123456","client_id":"Github app CLIENT_ID","client_secret":"Github app CLIENT_SECRET"}',
         headers: {
           'Accept' => 'application/json',
           'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'Authorization' => 'Basic MTIzNDU2OjEyMzQ1Njc4OTA=',
+          'Authorization' => 'Basic R2l0aHViIGFwcCBDTElFTlRfSUQ6R2l0aHViIGFwcCBDTElFTlRfU0VDUkVU',
           'Content-Type' => 'application/json',
           'User-Agent' => 'Octokit Ruby Gem 5.6.1'
         }

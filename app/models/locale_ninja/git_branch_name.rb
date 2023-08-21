@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module LocaleNinja
-  TRANSLATIONS_SUFFIX = '__translations'
+  TRANSLATIONS_SUFFIX = LocaleNinja.configuration.branch_suffix
   private_constant :TRANSLATIONS_SUFFIX
 
   class GitBranchName < String

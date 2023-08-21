@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 module LocaleNinja
-  class GithubApiService
+  class GithubService
     REPOSITORY_FULLNAME = LocaleNinja.configuration.repository
-    TRANSLATIONS_SUFFIX = '__translations'
 
     private_constant :REPOSITORY_FULLNAME
-    private_constant :TRANSLATIONS_SUFFIX
 
     delegate :user, :branches, :exchange_code_for_token, to: :@client
     delegate :blob, :commits_since, :content, :create_contents, :ref, :repository, :tree, :update_contents, :create_ref,
