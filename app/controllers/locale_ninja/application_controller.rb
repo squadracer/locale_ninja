@@ -22,12 +22,11 @@ module LocaleNinja
     end
 
     def set_client
-      @client = LocaleNinja.configuration.service.call.new
-      @client.token(access_token)
+      @client = LocaleNinja.configuration.service.call.new(access_token:)
     end
 
     def access_token
-      session.dig(:access, :access_token)
+      session[:access_token]
     end
 
     def authenticate!

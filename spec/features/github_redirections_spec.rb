@@ -4,11 +4,11 @@ require 'rails_helper'
 
 describe 'when user is redirected after github connection' do
   before do
-    github_octokit_stub(:get, '/branches', branches_result)
-    github_octokit_stub(:get, '/git/trees/heads/add-locales?recursive=true', recursive_tree_result)
-    github_octokit_stub(:get, '', repository_result)
-    github_faraday_stub(:get, '/user', { avatar_url: '', id: '', login: 'john_doe' }.to_json)
     access_token_stub
+    github_user_stub({ avatar_url: '', id: '', login: 'john_doe' }.to_json)
+    github_repo_stub(:get, '/branches', branches_result)
+    github_repo_stub(:get, '/git/trees/heads/add-locales?recursive=true', recursive_tree_result)
+    github_repo_stub(:get, '', repository_result)
   end
 
   it 'display homepage' do

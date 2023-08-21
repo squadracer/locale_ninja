@@ -8,13 +8,12 @@ module LocaleNinja
     private_constant :REPOSITORY_FULLNAME
     private_constant :TRANSLATIONS_SUFFIX
 
-    delegate :user, :branches, to: :@client
+    delegate :user, :branches, :exchange_code_for_token, to: :@client
     delegate :blob, :commits_since, :content, :create_contents, :ref, :repository, :tree, :update_contents, :create_ref,
              to: :@client, private: true
 
-    def token(access_token)
-      @token = access_token
-      @client = ::Octokit::Client.new(access_token:)
+    def initialize(options = {})
+      @client = GitClient.new(options)
     end
 
     def repo_information
@@ -56,10 +55,20 @@ module LocaleNinja
       end
     end
 
+    def branch_pulled?(branch_name)
+      pulled_branches_names.include?(branch_name)
+    end
+
     def save(branch, yml)
       create_branch(branch) unless branch_pulled?(branch.translation)
       push_modification(branch.translation, yml)
       create_pull_request(branch)
+    end
+
+    def code_for_token(code)
+      res = exchange_code_for_token(code)
+      @client = GitClient.new(res.to_h)
+      @client.access_token
     end
 
     def pulled_branches_names
@@ -110,11 +119,17 @@ module LocaleNinja
     end
   end
 
-  def branch_pulled?(branch_name)
-    pulled_branches_names.include?(branch_name)
-  end
-
   def select_branch_to_pull(selected_branch)
     pulled_branches_names.find { |branch| branch == selected_branch.translation } || selected_branch.base
+  end
+
+  class GitClient < ::Octokit::Client
+    def initialize(options = {})
+      super(
+        options.merge(
+          client_id: LocaleNinja.configuration.client_id,
+          client_secret: LocaleNinja.configuration.client_secret
+        ))
+    end
   end
 end
