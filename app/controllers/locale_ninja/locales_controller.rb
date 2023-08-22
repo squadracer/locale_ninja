@@ -4,7 +4,7 @@ module LocaleNinja
   require 'json'
   require 'cgi'
   class LocalesController < ApplicationController
-    before_action :set_client, only: %i[show update]
+    before_action :set_service, only: %i[show update]
 
     CLIENT_ID = LocaleNinja.configuration.client_id
     CLIENT_SECRET = LocaleNinja.configuration.client_secret
@@ -15,7 +15,7 @@ module LocaleNinja
     def show
       @locale = params[:locale]
       @branch_name = GitBranchName.new(params[:branch_id])
-      @source, @target = all_keys_for_locales(@client.pull(@branch_name), [I18n.default_locale.to_s, @locale])
+      @source, @target = all_keys_for_locales(@service.pull(@branch_name), [I18n.default_locale.to_s, @locale])
       @translations = @target.zip(@source)
     end
 
@@ -23,7 +23,7 @@ module LocaleNinja
       branch_name = GitBranchName.new(params[:branch_id])
       translation_keys = params[:val].permit!.to_h.compact_blank
       yml = keys2yml(translation_keys)
-      @client.save(branch_name, yml)
+      @service.save(branch_name, yml)
 
       flash[:success] = t('.success')
 

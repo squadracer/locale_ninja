@@ -11,7 +11,7 @@ module LocaleNinja
              to: :@client, private: true
 
     def initialize(options = {})
-      @client = GitClient.new(options)
+      @client = Client.new(options)
     end
 
     def repo_information
@@ -65,7 +65,7 @@ module LocaleNinja
 
     def code_for_token(code)
       res = exchange_code_for_token(code)
-      @client = GitClient.new(res.to_h)
+      @client = Client.new(res.to_h)
       @client.access_token
     end
 
@@ -122,7 +122,7 @@ module LocaleNinja
     pulled_branches_names.find { |branch| branch == selected_branch.translation } || selected_branch.base
   end
 
-  class GitClient < ::Octokit::Client
+  class Client < ::Octokit::Client
     def initialize(options = {})
       super(
         options.merge(

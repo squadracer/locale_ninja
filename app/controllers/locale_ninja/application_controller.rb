@@ -21,8 +21,8 @@ module LocaleNinja
       redirect_to(dashboard_index_path)
     end
 
-    def set_client
-      @client = LocaleNinja.configuration.service.call.new(access_token:)
+    def set_service
+      @service = LocaleNinja.configuration.service.call.new(access_token:)
     end
 
     def access_token

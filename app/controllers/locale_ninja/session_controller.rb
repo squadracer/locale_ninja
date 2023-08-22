@@ -3,12 +3,12 @@
 module LocaleNinja
   class SessionController < ApplicationController
     skip_before_action :authenticate!, only: %i[login logout]
-    before_action :set_client, only: :login
+    before_action :set_service, only: :login
 
     def login
       code = params['code']
-      session[:access_token] = @client.code_for_token(code)
-      session[:user] = @client.user.to_h.slice(:avatar_url, :id, :login)
+      session[:access_token] = @service.code_for_token(code)
+      session[:user] = @service.user.to_h.slice(:avatar_url, :id, :login)
 
       redirect_to(root_path)
     end
