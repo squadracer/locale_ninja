@@ -56,9 +56,20 @@ Once done you will have access to your `CLIENT_ID` and `CLIENT_SECRET`. You can 
 bin/rails g locale_ninja:install
 ```
 
-Follow instructions.
-This should create `config/initializers/locale_ninja.rb` :
+Follow instructions. You'll be prompted to choose the path of the engine in order to add this line (default: `/locale_ninja`)  :
+
+```ruby
+#config/routes.rb
+mount LocaleNinja::Engine => '/locale_ninja'
+```
+<br/>
+
+Your  translation manager will be accessible at `your-domain-name/locale_ninja` or `localhost:3000/locale_ninja` 🎉
+
+
+It also create this configuration file: 
 ```rb
+# config/initializers/locale_ninja.rb
 LocaleNinja.configure do |config|
   config.plateform = :github
   config.repository = 'organisation/repository'
@@ -71,15 +82,6 @@ We recommend to use rails credentials system to store your `CLIENT_SECRET`.
 <br/>
 For more info, check the rails guide [10 Environmental Security](https://edgeguides.rubyonrails.org/security.html#environmental-security).
 
-
-You now just have to add this in your routes :
-```ruby
-#config/routes.rb
-mount LocaleNinja::Engine => '/locale_ninja'
-```
-<br/>
-
-Your  translation manager will be accessible at `your-domain-name/locale_ninja` or `localhost:3000/locale_ninja` 🎉
 
 ## 👥 Contributors 
 
