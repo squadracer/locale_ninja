@@ -3,12 +3,20 @@
 module LocaleNinja
   class GithubService
     REPOSITORY_FULLNAME = LocaleNinja.configuration.repository
+    DEFAULT_BRANCH_NAME = LocaleNinja.configuration.default_branch
+    CLIENT_ID = LocaleNinja.configuration.client_id
 
     private_constant :REPOSITORY_FULLNAME
+    private_constant :DEFAULT_BRANCH_NAME
+    private_constant :CLIENT_ID
 
     delegate :user, :branches, :exchange_code_for_token, to: :@client
     delegate :blob, :commits_since, :content, :create_contents, :ref, :repository, :tree, :update_contents, :create_ref,
              to: :@client, private: true
+
+    def self.connection_url
+      "https://github.com/login/oauth/authorize?&client_id=#{CLIENT_ID}"
+    end
 
     def initialize(options = {})
       @client = Client.new(options)
@@ -18,31 +26,25 @@ module LocaleNinja
       repository(REPOSITORY_FULLNAME).to_h.slice(:full_name, :html_url)
     end
 
-    def commits_count(branch: 'translations')
-      commits_since(REPOSITORY_FULLNAME, 1.month.ago.strftime('%Y-%m-%d'), sha_or_branch: branch).count
-    end
-
-    def sum_commit_count(branches)
-      branches.sum { |branch| commits_count(branch:) }
-    end
-
     def default_branch
-      pulled_branches_names.intersection(%w[main master]).first || pulled_branches_names.first
+      branch = pulled_branches_names.find { |n| n == DEFAULT_BRANCH_NAME }
+      unless branch
+        raise LocaleNinja::Configuration::ConfigurationError,
+              "Unable to find default #{DEFAULT_BRANCH_NAME || "'nil'"} branch on the remote server."
+      end
+
+      branch
     end
 
     def displayable_branch_names
       pulled_branches_names.reject(&:translation?)
     end
 
-    def translation_branch_names
-      pulled_branches_names.filter(&:translation?)
+    def translation_commits_count
+      sum_commit_count(translation_branch_names)
     end
 
-    def select_branch_to_pull(selected_branch)
-      pulled_branches_names.find { |branch| branch == selected_branch.translation } || selected_branch.base
-    end
-
-    def locale_files_path(branch)
+    def locale_files_path(branch = DEFAULT_BRANCH_NAME)
       locale_files(select_branch_to_pull(branch)).map(&:path)
     end
 
@@ -51,10 +53,6 @@ module LocaleNinja
         content = Base64.decode64(blob(REPOSITORY_FULLNAME, file.sha).content)
         [file.path, content]
       end
-    end
-
-    def branch_pulled?(branch_name)
-      pulled_branches_names.include?(branch_name)
     end
 
     def save(branch, yml)
@@ -69,11 +67,27 @@ module LocaleNinja
       @client.access_token
     end
 
+    private
+
+    def sum_commit_count(branches)
+      branches.sum { |branch| commits_count(branch:) }
+    end
+
+    def translation_branch_names
+      pulled_branches_names.filter(&:translation?)
+    end
+
+    def commits_count(branch)
+      commits_since(REPOSITORY_FULLNAME, 1.month.ago.strftime('%Y-%m-%d'), sha_or_branch: branch).count
+    end
+
+    def branch_pulled?(branch_name)
+      pulled_branches_names.include?(branch_name)
+    end
+
     def pulled_branches_names
       @pulled_branches_names ||= pulled_branches.map { |branch| GitBranchName.new(branch.name) }
     end
-
-    private
 
     def locale_files(branch, dir = 'config/locales')
       return @locale_files if @locale_files.present?
@@ -116,10 +130,10 @@ module LocaleNinja
     def pulled_branches
       @pulled_branches ||= branches(REPOSITORY_FULLNAME)
     end
-  end
 
-  def select_branch_to_pull(selected_branch)
-    pulled_branches_names.find { |branch| branch == selected_branch.translation } || selected_branch.base
+    def select_branch_to_pull(selected_branch)
+      pulled_branches_names.find { |branch| branch == selected_branch.translation } || selected_branch.base
+    end
   end
 
   class Client < ::Octokit::Client

@@ -201,6 +201,8 @@ GEM
     regexp_parser (2.8.1)
     rexml (3.2.6)
     rouge (4.1.2)
+    rspec-collection_matchers (1.2.0)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
     rspec-expectations (3.12.3)
@@ -300,6 +302,7 @@ DEPENDENCIES
   pry-byebug
   puma
   rack-mini-profiler
+  rspec-collection_matchers
   rspec-rails (~> 6.0.0)
   rubocop
   rubocop-capybara

@@ -31,6 +31,7 @@ end
 
 group :test do
   gem 'capybara', require: false
+  gem 'rspec-collection_matchers', require: false
   gem 'selenium-webdriver', require: false
   gem 'webmock', require: false
 end

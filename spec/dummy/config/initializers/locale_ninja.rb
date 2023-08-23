@@ -3,6 +3,7 @@
 LocaleNinja.configure do |config|
   config.plateform = :github
   config.repository = 'squadracer/locale-ninja-test'
+  config.default_branch = 'main'
   config.branch_suffix = '__translations'
   config.client_id = Rails.application.credentials.github.client_id
   config.client_secret = Rails.application.credentials.github.client_secret

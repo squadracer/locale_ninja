@@ -2,7 +2,7 @@
 
 module LocaleNinja
   class Configuration
-    class PlateformMisMatch < StandardError; end
+    class ConfigurationError < StandardError; end
 
     PLATEFORM_SERVICE_MAP = {
       github: -> { LocaleNinja::GithubService }
@@ -10,10 +10,18 @@ module LocaleNinja
     private_constant :PLATEFORM_SERVICE_MAP
 
     attr_accessor :repository, :client_id, :client_secret, :branch_suffix
-    attr_reader :service
+    attr_writer :default_branch
+
+    def default_branch
+      GitBranchName.new @default_branch
+    end
+
+    def service
+      @service.call
+    end
 
     def plateform=(plateform)
-      raise(PlateformMisMatch, "#{plateform} is not included in #{PLATEFORM_SERVICE_MAP.keys.join}") unless PLATEFORM_SERVICE_MAP.key?(plateform)
+      raise ConfigurationError, "#{plateform} is not included in #{PLATEFORM_SERVICE_MAP.keys.join}" unless PLATEFORM_SERVICE_MAP.key?(plateform)
 
       @service = PLATEFORM_SERVICE_MAP[plateform]
     end
