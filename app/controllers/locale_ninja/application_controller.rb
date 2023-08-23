@@ -3,13 +3,12 @@
 module LocaleNinja
   require 'octokit'
   require 'httparty'
-  class ApplicationController < ActionController::Base
+  class ApplicationController < ::ApplicationController
+    include LocaleHelper
+
     add_flash_types :alert, :info, :error, :warning, :success
     before_action :authenticate!, skip: :authenticate!
     rescue_from ::Octokit::Unauthorized, with: :clear_session
-
-    CLIENT_ID = Rails.application.credentials.github.client_id
-    private_constant :CLIENT_ID
 
     private
 
@@ -18,8 +17,8 @@ module LocaleNinja
       redirect_to(dashboard_index_path)
     end
 
-    def set_client
-      @client = GithubApiService.new(access_token:)
+    def set_service
+      @service = LocaleNinja.configuration.service.new(access_token:)
     end
 
     def access_token
@@ -29,7 +28,7 @@ module LocaleNinja
     def authenticate!
       return if access_token
 
-      redirect_to("https://github.com/login/oauth/authorize?scope=repo,user&client_id=#{CLIENT_ID}", allow_other_host: true)
+      redirect_to(LocaleNinja.configuration.service.connection_url, allow_other_host: true)
     end
   end
 end

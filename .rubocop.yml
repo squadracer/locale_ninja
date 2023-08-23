@@ -273,7 +273,7 @@ Style/KeywordParametersOrder:
   Enabled: true
 
 Style/MethodCallWithArgsParentheses:
-  Enabled: true
+  EnforcedStyle: omit_parentheses
 
 Style/MissingElse:
   Enabled: false

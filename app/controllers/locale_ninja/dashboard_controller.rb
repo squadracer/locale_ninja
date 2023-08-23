@@ -2,13 +2,13 @@
 
 module LocaleNinja
   class DashboardController < ApplicationController
-    before_action :set_client, only: [:index]
+    before_action :set_service, only: [:index]
 
     def index
-      @locales_count = LocaleHelper.locales_count(@client, branch: @client.default_branch)
-      @repo = @client.repo_information
-      @branches_count = @client.public_branch_names.count
-      @total_translation_commits_count = @client.total_translation_commits_count
+      @locales_count = @service.locale_files_path.count
+      @repo = @service.repo_information
+      @branches_count = @service.displayable_branch_names.count
+      @total_translation_commits_count = @service.translation_commits_count
     end
   end
 end
